@@ -121,4 +121,5 @@
   - [画面遷移図](https://www.figma.com/design/mGcQWNAu6rix3Myc0CvQ2X/%E3%83%91%E3%83%B3%E3%82%AB%E3%83%93%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B%E3%82%A2%E3%83%97%E3%83%AA?node-id=0-1&m=dev&t=pHMUbDI92hwxMPde-1)
 
 ## ER図
-  - 後ほど追加します
+  - https://dbdiagram.io/d/bread-mold-notifier-694fcdfb39fa3db27ba11652
+    
