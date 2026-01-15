@@ -1,0 +1,44 @@
+services:
+  db:
+    image: postgres:16
+    restart: always
+    # コンテナを消してもデータが消えないようにボリュームを設定
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data
+    environment:
+      TZ: Asia/Tokyo
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: myapp_development
+
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d myapp_development -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: bash -c "bundle install && bundle exec rails db:prepare && rm -f tmp/pids/server.pid && ./bin/dev"
+    tty: true
+    stdin_open: true
+    volumes:
+      - .:/app
+      - bundle_data:/usr/local/bundle:cached
+      - node_modules:/app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      TZ: Asia/Tokyo
+      DATABASE_URL: postgres://postgres:password@db:5432/myapp_development
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  bundle_data:
+  postgresql_data:
+  node_modules:
