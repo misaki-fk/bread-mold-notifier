@@ -15,4 +15,7 @@ test:
   database: myapp_test
 
 production:
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %> #同時に使えるDBsetuzokunosaidaisuu
   url: <%= ENV["DATABASE_URL"] %>
