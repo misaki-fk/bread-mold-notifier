@@ -28,7 +28,7 @@ RUN bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
     bundle exec bootsnap precompile --gemfile
 
-# package.json / npm install
+# Node モジュールインストール（DaisyUI 含む）
 COPY package.json package-lock.json ./
 RUN npm install
 
@@ -38,7 +38,7 @@ COPY . .
 # bootsnap precompile
 RUN bundle exec bootsnap precompile app/ lib/
 
-# assets:precompile（DaisyUI対応）
+# assets:precompile
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
 # ----------------------------
