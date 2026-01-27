@@ -1,26 +1,31 @@
-<div
-  class="min-h-screen bg-repeat flex items-center justify-center px-4"
-  style="background-image: url(<%= asset_path 'breads_bg_mobile.png' %>)"
->
-  <div class="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-xl w-full max-w-sm text-center">
-    <h1 class="text-2xl font-bold mb-3">
-      パンカビお知らせアプリ
-    </h1>
+<div class="relative min-h-screen w-full flex items-center justify-center p-4">
+  <div
+    class="absolute inset-0 -z-10 bg-center bg-no-repeat bg-cover opacity-35"
+    style="background-image: url(<%= asset_path 'breads_bg_mobile.png' %>)"
+  ></div>
 
-    <p class="text-gray-700 mb-6 leading-relaxed">
-      パンの在庫と期限を<br>
-      カンタン管理
-    </p>
+  <div class="card bg-base-100 shadow-2xl w-full max-w-md text-center">
+    <div class="card-body p-8">
+      <h1 class="text-3xl font-bold text-base-content leading-tight">
+        パンカビお知らせアプリ<br>
+        <span class="text-primary">Pankabi</span>
+      </h1>
 
-    <div class="flex flex-col gap-4">
-      <%= link_to "今すぐ使う（会員登録なし）", "#",
-        class: "block w-full py-3 bg-amber-500 text-white rounded-xl font-semibold text-center active:scale-95" %>
+      <p class="text-base-content/70 mt-2">
+        パンの在庫と期限を<br>
+        カンタン管理
+      </p>
 
-      <div class="flex justify-center gap-3 text-sm">
-        <%= link_to "新規登録", "#",
-          class: "px-4 py-2 border border-orange-400 text-orange-500 rounded-lg" %>
-        <%= link_to "ログイン", "#",
-          class: "px-4 py-2 border border-orange-400 text-orange-500 rounded-lg" %>
+      <div class="mt-8 flex flex-col gap-4">
+        <%= link_to "今すぐ使う（会員登録なし）", "#",
+          class: "btn btn-primary btn-lg rounded-xl transition-transform active:scale-95" %>
+
+        <div class="grid grid-cols-2 gap-3">
+          <%= link_to "新規登録", "#",
+            class: "btn btn-outline btn-secondary rounded-lg" %>
+          <%= link_to "ログイン", "#",
+            class: "btn btn-outline btn-secondary rounded-lg" %>
+        </div>
       </div>
     </div>
   </div>
