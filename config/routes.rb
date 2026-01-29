@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  root "home#index"
-
+  root "top#index"
+  get "/home", to: "home#index"
   resources :breads, only: [:index]
 
   # Devise導入時に消す予定

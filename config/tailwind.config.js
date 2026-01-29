@@ -21,20 +21,20 @@ module.exports = {
     themes: [
       {
         bread: {
-          "primary": "#a56c2fff",
-          "primary-content": "#ffffff",
+          "primary": "#C69C6D",
+          "primary-content": "#4B3425",
 
           "secondary": "#e9c455ff",
           "secondary-content": "#4B3425",
 
-          "accent": "#E17055",
+          "accent": "#83715F",
           "accent-content": "#ffffff",
 
           "neutral": "#4B3425",
           "neutral-content": "#ffffff",
 
-          "base-100": "#FFF8EE",
-          "base-200": "#F5EBDD",
+          "base-100": "#FFFEF9",
+          "base-200": "#F7F5EE",
           "base-300": "#EADCC8",
           "base-content": "#4B3425",
 
