@@ -8,10 +8,8 @@
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-
+  <%= render "layouts/header" %>
   <body>
-    <%= render "layouts/header" %>
-
     <main>
       <%= yield %>
     </main>
