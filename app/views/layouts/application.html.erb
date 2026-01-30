@@ -9,7 +9,9 @@
     <%= javascript_importmap_tags %>
   </head>
   <body class="mx-auto min-w-[375px] max-w-sm md:max-w-xl min-h-screen">
-    <%= render "layouts/header" %>
+    <% unless @hide_header %>
+      <%= render "layouts/header" %>
+    <% end %>
     <main>
       <%= yield %>
     </main>
