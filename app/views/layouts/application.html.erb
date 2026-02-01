@@ -8,12 +8,12 @@
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-  <body class="mx-auto min-w-[375px] max-w-sm md:max-w-xl min-h-screen">
-    <% unless @hide_header %>
-      <%= render "layouts/header" %>
-    <% end %>
-    <main>
-      <%= yield %>
-    </main>
-  </body>
+<body class="mx-auto min-w-[375px] max-w-sm md:max-w-xl min-h-screen">
+  <% if content_for?(:header) %>
+    <%= yield :header %>
+  <% end %>
+
+  <main>
+    <%= yield %>
+  </main>
 </html>
