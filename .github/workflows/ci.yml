@@ -39,8 +39,19 @@ jobs:
           ruby-version: 3.2.2
           bundler-cache: true
 
-      # ③ DB準備
+      # ③ Node.js（← これ必須）
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # ④ DB準備
       - run: bin/rails db:prepare
 
-      # ④ rspec実行
+      # ⑤ CSSビルド（← rspecより前）
+      - name: Build CSS
+        run: bundle exec rails assets:precompile
+
+      # ⑥ rspec実行
       - run: bundle exec rspec
+
+

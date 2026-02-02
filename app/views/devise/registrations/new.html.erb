@@ -1,0 +1,25 @@
+<h1 class="text-2xl font-bold text-center my-8">新規登録</h1>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+
+  <div class="form-control mb-4 max-w-sm mx-auto">
+    <%= f.label :email, "メールアドレス" %>
+    <%= f.email_field :email, class: "input input-bordered w-full" %>
+  </div>
+
+  <div class="form-control mb-4 max-w-sm mx-auto">
+    <%= f.label :password, "パスワード" %>
+    <%= f.password_field :password, class: "input input-bordered w-full" %>
+  </div>
+
+  <div class="form-control mb-8 max-w-sm mx-auto">
+    <%= f.label :password_confirmation, "パスワード確認" %>
+    <%= f.password_field :password_confirmation, class: "input input-bordered w-full" %>
+  </div>
+
+  <div class="max-w-xs mx-auto my-12">
+    <%= f.submit "登録する", class: "btn btn-primary w-40 mx-auto block text-lg" %>
+  </div>
+
+<% end %>
+
