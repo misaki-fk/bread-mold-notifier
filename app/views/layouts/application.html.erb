@@ -9,6 +9,12 @@
     <%= javascript_importmap_tags %>
   </head>
 <body class="mx-auto max-w-sm md:max-w-xl min-h-screen">
+  <% flash.each do |key, message| %>
+    <div class="alert alert-info mb-4">
+      <%= message %>
+    </div>
+  <% end %>
+  
   <% if content_for?(:header) %>
     <%= yield :header %>
   <% end %>
