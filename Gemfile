@@ -75,5 +75,6 @@ gem "rspec-rails", "~> 7.1", :groups => [:development, :test]
 gem "devise"
 
 group :development do
-  gem 'letter_opener'
+  gem 'letter_opener'      # メールをすぐブラウザで確認したい場合
+  gem 'letter_opener_web'  # 過去メールを一覧で見たい場合
 end

@@ -10,3 +10,8 @@ ja:
       inactive: "アカウントが有効化されていません"
       invalid: "メールアドレスまたはパスワードが違います"
       not_found_in_database: "メールアドレスまたはパスワードが違います"
+    passwords:
+      send_instructions: "パスワード再設定のメールを送信しました"
+      updated: "パスワードが変更されました"
+      user:
+        send_instructions:"パスワード再設定用のメールを送信しました"
