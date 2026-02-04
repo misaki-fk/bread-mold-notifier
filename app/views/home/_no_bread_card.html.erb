@@ -11,5 +11,16 @@
     <%= link_to "#", class: "btn btn-primary w-48 mt-4" do %>
       パンを登録
     <% end %>
+    #logouttest
+    <% if user_signed_in? %>
+    <div class="text-right text-sm opacity-60 mt-4">
+    <%= button_to "ログアウト",
+        destroy_user_session_path,
+        method: :delete,
+        data: { turbo: false },
+        class: "btn btn-ghost btn-xs" %>
+    </div>
+    <% end %>
+
   </div>
 </div>
