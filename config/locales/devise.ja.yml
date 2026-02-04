@@ -1,7 +1,12 @@
 ja:
   devise:
     sessions:
+      signed_up: "新規登録が完了しました"
       signed_in: "ログインしました"
       signed_out: "ログアウトしました"
+      destroyed: "アカウントを削除しました"
     failure:
       already_authenticated: "すでにログインしています"
+      inactive: "アカウントが有効化されていません"
+      invalid: "メールアドレスまたはパスワードが違います"
+      not_found_in_database: "メールアドレスまたはパスワードが違います"
