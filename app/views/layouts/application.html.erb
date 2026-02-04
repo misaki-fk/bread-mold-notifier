@@ -8,12 +8,39 @@
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-<body class="mx-auto max-w-sm md:max-w-xl min-h-screen">
+
+<body class="mx-auto max-w-sm md:max-w-xl min-h-screen relative">
+
+  <% flash.each do |key, message| %>
+    <% bg_class =
+      case key.to_sym
+      when :notice then "bg-info text-primary-content"
+      when :alert  then "bg-error text-error-content"
+      else "bg-base-200 text-base-content"
+      end
+    %>
+  
+    <div class="fixed top-0 left-1/2 -translate-x-1/2 z-50 w-full max-w-sm md:max-w-xl">
+      <div class="alert <%= bg_class %> rounded-none py-2 min-h-14 flex justify-between items-center">
+        <span><%= message %></span>
+        <button
+          type="button"
+          class="btn btn-ghost btn-sm"
+          onclick="this.closest('.alert').parentElement.remove()"
+        >
+          ✕
+        </button>
+      </div>
+    </div>
+  <% end %>
+
   <% if content_for?(:header) %>
     <%= yield :header %>
   <% end %>
 
-  <main class="pt-4">
+  <main>
     <%= yield %>
   </main>
+</body>
+
 </html>
