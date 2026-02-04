@@ -10,6 +10,8 @@
   <div class="max-w-xs mx-auto mt-16">
     <%= f.submit "送信する", class: "btn btn-primary w-40 mx-auto block text-lg" %>
   </div>
-
+  <div class="text-center mt-6">
+    <%= link_to "ログインに戻る", new_session_path(resource_name), class: "link link-primary" %>
+  </div>
 
 <% end %>
