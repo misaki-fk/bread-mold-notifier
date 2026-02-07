@@ -4,7 +4,7 @@
 
       <h2 class="card-title text-xl mb-4">パンを登録 🍞</h2>
 
-      <%= form_with model: @bread, url: breads_path do |f| %>
+      <%= form_with model: @bread, url: breads_path, local: true, html: { id: "bread-form" } do |f| %>
 
         <!-- パンの種類 -->
         <div class="form-control mb-4">

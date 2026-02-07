@@ -3,6 +3,8 @@ class BreadsController < ApplicationController
   def new
     @bread = Bread.new
     @bread_types = BreadType.all
+    Rails.logger.debug "CURRENT DB: #{BreadType.connection.current_database}"
+    Rails.logger.debug "BREAD TYPES: #{@bread_types.inspect}"
   end
 
   def create
