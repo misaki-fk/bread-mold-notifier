@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'breads/new'
+  get 'breads/create'
   if Rails.env.development?
    require "letter_opener_web"
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
