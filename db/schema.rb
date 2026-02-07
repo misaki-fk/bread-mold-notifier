@@ -33,6 +33,11 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_07_022101) do
     t.index ["user_id"], name: "index_breads_on_user_id"
   end
 
+  create_table "playing_with_neon", id: :serial, force: :cascade do |t|
+    t.text "name", null: false
+    t.float "value"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
