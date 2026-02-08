@@ -1,0 +1,2 @@
+class BreadType < ApplicationRecord
+end

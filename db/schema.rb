@@ -10,13 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_01_30_043036) do
+ActiveRecord::Schema[7.1].define(version: 2026_02_07_022101) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "playing_with_neon", id: :serial, force: :cascade do |t|
-    t.text "name", null: false
-    t.float "value"
+  create_table "bread_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "breads", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "bread_type_id", null: false
+    t.integer "total_count"
+    t.integer "remaining_count"
+    t.integer "daily_consumption"
+    t.date "expiration_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bread_type_id"], name: "index_breads_on_bread_type_id"
+    t.index ["user_id"], name: "index_breads_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -31,4 +45,6 @@ ActiveRecord::Schema[7.1].define(version: 2026_01_30_043036) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "breads", "bread_types"
+  add_foreign_key "breads", "users"
 end
