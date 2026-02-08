@@ -29,7 +29,8 @@
         <div class="form-control mb-4">
           <%= f.label :daily_consumption, "1日あたりの消費数", class: "label" %>
           <%= f.number_field :daily_consumption,
-                step: 0.5,
+                min: 1,
+                step: 1,
                 value: 1,
                 class: "input input-bordered" %>
         </div>

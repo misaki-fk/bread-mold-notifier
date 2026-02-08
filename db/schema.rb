@@ -25,17 +25,12 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_07_022101) do
     t.bigint "bread_type_id", null: false
     t.integer "total_count"
     t.integer "remaining_count"
-    t.float "daily_consumption"
+    t.integer "daily_consumption"
     t.date "expiration_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bread_type_id"], name: "index_breads_on_bread_type_id"
     t.index ["user_id"], name: "index_breads_on_user_id"
-  end
-
-  create_table "playing_with_neon", id: :serial, force: :cascade do |t|
-    t.text "name", null: false
-    t.float "value"
   end
 
   create_table "users", force: :cascade do |t|
