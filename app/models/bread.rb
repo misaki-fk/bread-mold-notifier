@@ -1,5 +1,5 @@
 class Bread < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
   belongs_to :bread_type
 
   validates :daily_consumption,

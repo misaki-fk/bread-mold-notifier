@@ -1,55 +1,64 @@
-<div class="max-w-md mx-auto mt-10">
-  <div class="card bg-base-100 shadow-xl">
-    <div class="card-body">
-
-      <h2 class="card-title text-xl mb-4">パンを登録 🍞</h2>
-
-      <%= form_with model: @bread, url: breads_path, local: true, html: { id: "bread-form" } do |f| %>
-
-        <!-- パンの種類 -->
-        <div class="form-control mb-4">
-          <%= f.label :bread_type_id, "パンの種類", class: "label" %>
-          <%= f.collection_select(
-                :bread_type_id,
-                @bread_types,
-                :id,
-                :name,
-                { prompt: "選択してください" },
-                class: "select select-bordered"
-              ) %>
-        </div>
-
-        <!-- 入り数 -->
-        <div class="form-control mb-4">
-          <%= f.label :total_count, "入り数", class: "label" %>
-          <%= f.number_field :total_count, min: 1, class: "input input-bordered" %>
-        </div>
-
-        <!-- 1日あたりの消費数 -->
-        <div class="form-control mb-4">
-          <%= f.label :daily_consumption, "1日あたりの消費数", class: "label" %>
-          <%= f.number_field :daily_consumption,
-                min: 1,
-                step: 1,
-                value: 1,
-                class: "input input-bordered" %>
-        </div>
-
-        <!-- 消費期限 -->
-        <div class="form-control mb-6">
-          <%= f.label :expiration_date, "消費期限", class: "label" %>
-          <%= f.date_field :expiration_date, class: "input input-bordered" %>
-        </div>
-
-        <!-- ボタン -->
-        <div class="form-control mt-8">
-          <div class="flex justify-center">
-            <%= f.submit "登録する", class: "btn btn-primary w-48" %>
+<div class="bg-base-200 min-h-screen pt-10">
+  <div class="max-w-md mx-auto ">
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+  
+        <h2 class="card-title text-xl mb-4">パンを登録 🍞</h2>
+  
+        <%= form_with model: @bread,
+                url: breads_path,
+                local: true,
+                html: {
+                  id: "bread-form",
+                  data: { signed_in: user_signed_in?,
+                          turbo: false }
+                } do |f| %>
+  
+          <!-- パンの種類 -->
+          <div class="form-control mb-4">
+            <%= f.label :bread_type_id, "パンの種類", class: "label" %>
+            <%= f.collection_select(
+                  :bread_type_id,
+                  @bread_types,
+                  :id,
+                  :name,
+                  { prompt: "選択してください" },
+                  class: "select select-bordered"
+                ) %>
           </div>
-        </div>
-
-      <% end %>
-
+  
+          <!-- 入り数 -->
+          <div class="form-control mb-4">
+            <%= f.label :total_count, "入り数", class: "label" %>
+            <%= f.number_field :total_count, min: 1, class: "input input-bordered" %>
+          </div>
+  
+          <!-- 1日あたりの消費数 -->
+          <div class="form-control mb-4">
+            <%= f.label :daily_consumption, "1日あたりの消費数", class: "label" %>
+            <%= f.number_field :daily_consumption,
+                  min: 1,
+                  step: 1,
+                  value: 1,
+                  class: "input input-bordered" %>
+          </div>
+  
+          <!-- 消費期限 -->
+          <div class="form-control mb-6">
+            <%= f.label :expiration_date, "消費期限", class: "label" %>
+            <%= f.date_field :expiration_date, class: "input input-bordered" %>
+          </div>
+  
+          <!-- ボタン -->
+          <div class="form-control mt-8">
+            <div class="flex justify-center">
+              <%= f.submit "登録する", class: "btn btn-primary w-48" %>
+            </div>
+          </div>
+  
+        <% end %>
+  
+      </div>
     </div>
   </div>
 </div>
