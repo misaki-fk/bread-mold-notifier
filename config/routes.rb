@@ -10,6 +10,5 @@ Rails.application.routes.draw do
   
   resources :breads, only: [:new, :create, :destroy]
 
-  post 'users/guest_sign_in', to: 'users/sessions#guest'
   get "up" => "rails/health#show", as: :rails_health_check
 end
