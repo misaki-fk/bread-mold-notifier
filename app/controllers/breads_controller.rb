@@ -7,17 +7,16 @@ class BreadsController < ApplicationController
 
   def create
     if user_signed_in?
-      @bread = current_user.breads.new(bread_params)
+      @bread = current_user.breads.build(bread_params)
 
       if @bread.save
         redirect_to home_path, notice: "パンを登録しました 🍞"
       else
-        @bread_types = BreadType.all
         render :new, status: :unprocessable_entity
       end
     else
       # ゲストはJS側で保存するので、Railsは何もしない
-      head :ok
+      redirect_to home_path, notice: "ゲストユーザーとしてパンを登録しました 🍞"
     end
   end
 

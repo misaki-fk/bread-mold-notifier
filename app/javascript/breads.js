@@ -1,6 +1,7 @@
 console.log("breads.js loaded");
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("turbo:load", () => {
+  console.log("breads.js loaded");
   const form = document.getElementById("bread-form");
   if (!form) return;
 
@@ -26,6 +27,8 @@ function saveToLocalStorage() {
   const breads = JSON.parse(localStorage.getItem("guest_breads")) || [];
   breads.push(bread);
   localStorage.setItem("guest_breads", JSON.stringify(breads));
+
+  console.log("保存後:", breads);
 
   alert("ゲストとしてパンを登録しました 🍞");
   window.location.href = "/home";
