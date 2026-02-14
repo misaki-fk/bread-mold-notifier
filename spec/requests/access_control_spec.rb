@@ -10,11 +10,12 @@ RSpec.describe 'アクセス制御', type: :request do
   end
 
   context '未ログイン時' do
-    it 'ホーム画面は閲覧できる' do
+    it 'ホーム画面にアクセスするとログイン画面へリダイレクトされる' do
       get home_path
-      expect(response).to have_http_status(:ok)
+      expect(response).to redirect_to(new_user_session_path)
     end
   end
+
 
   context 'ログイン後' do
     before { sign_in user }
