@@ -9,6 +9,15 @@
     <p class="text-lg font-bold mt-2">
       <%= bread.status_message %>
     </p>
+    <span class="bg-yellow-100 px-4 py-4 rounded-2xl inline-block">
+      <p class="text-lg font-semibold">
+        消費期限
+      </p>
+    
+      <p class="text-2xl font-bold">
+        <%= bread.expiration_date&.strftime("%Y年%m月%d日") %>
+      </p>
+    </span>
 
   </div>
 </div>
