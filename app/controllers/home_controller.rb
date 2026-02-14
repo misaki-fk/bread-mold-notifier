@@ -1,9 +1,7 @@
 class HomeController < ApplicationController
-# app/controllers/application_controller.rb
-class ApplicationController < ActionController::Base
-  def after_sign_in_path_for(resource)
-    home_path
-  end
-end
+  before_action :authenticate_user!
 
+  def index
+    @breads = current_user.breads
+  end
 end
