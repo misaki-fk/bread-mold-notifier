@@ -1,7 +1,10 @@
 <div class="card w-full max-w-sm h-[580px] bg-base-100 shadow-md">
   <div class="flex flex-col items-center justify-center text-center gap-4 p-8 h-full">
     <p class="text-base font-bold mt-2">
-      <%= bread.status_message %>
+      あなたの
+        <span class="underline decoration-primary underline-offset-2">
+          <%= bread.bread_type.name %>
+        </span>
     </p>
     <p class="text-lg font-bold mt-2">
       <%= bread.status_message %>
