@@ -21,7 +21,9 @@ class Bread < ApplicationRecord
     consumed = daily_consumption * days_passed
     remaining = total_count - consumed
   
+     remaining = remaining.to_i
     remaining.positive? ? remaining : 0
+
   end
 
   # 状態
