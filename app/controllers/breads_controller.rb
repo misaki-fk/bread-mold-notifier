@@ -12,6 +12,7 @@ class BreadsController < ApplicationController
       if @bread.save
         redirect_to home_path, notice: "パンを登録しました 🍞"
       else
+        @bread_types = BreadType.all
         render :new, status: :unprocessable_entity
       end
     else
