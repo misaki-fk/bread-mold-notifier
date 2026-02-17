@@ -1,13 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'パスワードリセット', type: :request do
-  let(:user) do
-    User.create!(
-      email: 'test@example.com',
-      password: 'oldpassword',
-      password_confirmation: 'oldpassword'
-    )
-  end
+  let(:user) { create(:user) }
 
   before do
     ActionMailer::Base.deliveries.clear

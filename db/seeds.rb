@@ -4,7 +4,7 @@
 BreadType.destroy_all
 
 # パンの種類を作成
-["食パン", "ロールパン", "その他"].each do |name|
+["食パン", "ロールパン", "その他のパン"].each do |name|
   BreadType.create!(name: name)
 end
 

@@ -27,20 +27,25 @@ class Bread < ApplicationRecord
   end
 
   # 状態
-def status_message
-  return "完食しました🎉" if remaining_count.zero?
-
-  case days_until_expiration
-  when ..-1
-    "危険です（自己責任）❗️"
-  when 0
-    "期限が今日までです⚠️"
-  when 1
-    "明日が消費期限です"
-  else
-    "まだ大丈夫です👍"
+  def status_message
+    return "完食しました🎉" if remaining_count.zero?
+  
+    case days_until_expiration
+    when ..-1
+      "危険です（自己責任）❗️"
+    when 0
+      "期限が今日までです⚠️"
+    when 1
+      "明日が消費期限です"
+    else
+      "まだ大丈夫です👍"
+    end
   end
-end
 
+  private
+
+  def set_remaining_count
+    self.remaining_count = total_count
+  end
 
 end

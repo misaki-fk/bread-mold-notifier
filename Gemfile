@@ -78,3 +78,7 @@ group :development do
   gem 'letter_opener'      # メールをすぐブラウザで確認したい場合
   gem 'letter_opener_web'  # 過去メールを一覧で見たい場合
 end
+
+group :development, :test do
+  gem "factory_bot_rails"
+end

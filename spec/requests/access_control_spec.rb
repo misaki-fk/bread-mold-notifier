@@ -1,13 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'アクセス制御', type: :request do
-  let(:user) do
-    User.create!(
-      email: 'test@example.com',
-      password: 'password123',
-      password_confirmation: 'password123'
-    )
-  end
+  let(:user) { create(:user) }
+
 
   context '未ログイン時' do
     it 'ホーム画面にアクセスするとログイン画面へリダイレクトされる' do
