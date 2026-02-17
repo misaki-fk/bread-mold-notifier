@@ -1,5 +1,6 @@
 class BreadsController < ApplicationController
-
+  before_action :set_bread, only: [:edit, :update]
+  
   def new
     @bread = Bread.new
     @bread_types = BreadType.all
@@ -15,13 +16,25 @@ class BreadsController < ApplicationController
         @bread_types = BreadType.all
         render :new, status: :unprocessable_entity
       end
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @bread.update(bread_params)
+      redirect_to home_path, notice: "パンを更新しました 🍞"
     else
-      # ゲストはJS側で保存するので、Railsは何もしない
-      redirect_to home_path, notice: "ゲストユーザーとしてパンを登録しました 🍞"
+      render :edit, status: :unprocessable_entity
     end
   end
 
   private
+
+  def set_bread
+    @bread = current_user.breads.find(params[:id])
+  end
 
   def bread_params
     params.require(:bread).permit(
