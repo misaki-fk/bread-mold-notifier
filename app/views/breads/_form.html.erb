@@ -1,5 +1,4 @@
 <%= form_with model: @bread,
-        url: breads_path,
         local: true,
         html: {
           id: "bread-form",
@@ -40,7 +39,9 @@
   <!-- ボタン -->
   <div class="form-control mt-8">
     <div class="flex justify-center">
-      <%= f.submit "登録する", class: "btn btn-primary w-48" %>
+      <%= f.submit @bread.persisted? ? "更新する" : "登録する",
+      class: "btn btn-primary w-48" %>
+
     </div>
   </div>
 <% end %>

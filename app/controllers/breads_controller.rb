@@ -1,7 +1,8 @@
 class BreadsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
   before_action :set_bread, only: [:edit, :update]
-  
+  before_action :set_bread_types, only: [:new, :edit, :create, :update]
+
   def new
     @bread = Bread.new
     @bread_types = BreadType.all
@@ -34,6 +35,10 @@ class BreadsController < ApplicationController
 
   def set_bread
     @bread = current_user.breads.find(params[:id])
+  end
+
+  def set_bread_types
+    @bread_types = BreadType.all
   end
 
   def bread_params
