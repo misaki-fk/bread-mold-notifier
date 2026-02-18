@@ -1,6 +1,12 @@
 <div class="bg-base-200 min-h-screen pt-10">
   <div class="max-w-md mx-auto ">
-    <div class="card bg-base-100 shadow-xl">
+    <div class="card bg-base-100 shadow-xl relative">
+      <div class="absolute top-4 right-4">
+        <%= link_to home_path,
+            class: "w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-500 text-lg" do %>
+          ×
+        <% end %>
+      </div>
       <div class="card-body">
         <h2 class="card-title text-xl mb-4">パンを編集🍞</h2>
         <%= render "form", bread: @bread, bread_types: @bread_types %>
