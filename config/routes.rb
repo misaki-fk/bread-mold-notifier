@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   
   root "top#index"
   get "/home", to: "home#index"
-  
-  resources :breads, only: [:new, :create, :destroy]
+
+  resources :breads, only: [:new, :create, :edit, :update, :destroy]
 
   # ゲストログイン
   devise_scope :user do
