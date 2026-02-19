@@ -1,8 +1,9 @@
 class Bread < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :bread_type
-
-  validates :daily_consumption,
+  validates :expiration_date, presence: true
+  validates :total_count, presence: true
+  validates :daily_consumption, presence: true,
   numericality: {
     only_integer: true, #小数なし
     greater_than: 0 # 0より大きい 

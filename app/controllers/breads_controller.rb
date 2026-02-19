@@ -15,6 +15,7 @@ class BreadsController < ApplicationController
       redirect_to home_path, notice: "パンを登録しました 🍞"
     else
       @bread_types = BreadType.all
+      flash.now[:alert] = "入力に不備があります"
       render :new, status: :unprocessable_entity
     end
   end
@@ -27,8 +28,15 @@ class BreadsController < ApplicationController
       redirect_to home_path, notice: "パンを更新しました 🍞"
     else
       @bread_types = BreadType.all
+      flash.now[:alert] = "入力に不備があります"
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @bread = current_user.breads.find(params[:id])
+    @bread.destroy
+    redirect_to home_path, notice: "完食しました！ 🍞"
   end
 
   private
