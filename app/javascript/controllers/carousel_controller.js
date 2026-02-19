@@ -75,3 +75,9 @@ export default class extends Controller {
     })
   }
 }
+
+function deleteBread(id) {
+  let breads = JSON.parse(localStorage.getItem("guest_breads")) || [];
+  breads = breads.filter(bread => bread.id !== id);
+  localStorage.setItem("guest_breads", JSON.stringify(breads));
+}

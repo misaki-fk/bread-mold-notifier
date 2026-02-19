@@ -31,6 +31,12 @@ class BreadsController < ApplicationController
     end
   end
 
+  def destroy
+    bread = current_user.breads.find(params[:id])
+    bread.destroy
+    redirect_to home_path, notice: "完食しました！ 🍞"
+  end
+
   private
 
   def set_bread

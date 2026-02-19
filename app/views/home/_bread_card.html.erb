@@ -46,5 +46,10 @@
       </p>
     </span>
 
+    <%= button_to "完食", bread_path(bread),
+              method: :delete,
+              data: { turbo_confirm: "本当に完食しましたか？" },
+              class: "btn btn-primary rounded-xl px-6 mt-4" %>
+
   </div>
 </div>
