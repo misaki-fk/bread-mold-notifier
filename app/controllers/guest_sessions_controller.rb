@@ -17,6 +17,6 @@ class GuestSessionsController < Devise::SessionsController
     end
 
     sign_in(user)
-    redirect_to root_path, notice: "ゲストログインしました"
+    redirect_to home_path, notice: "パン管理をはじめましょう！"
   end
 end
