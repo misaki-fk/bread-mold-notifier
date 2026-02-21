@@ -8,9 +8,10 @@ export default class extends Controller {
     this.total = this.trackTarget.children.length
     this.isAnimating = false
 
-    this.trackTarget.addEventListener("transitionend", () => {
-      this.isAnimating = false
-    })
+  this.trackTarget.addEventListener("transitionend", (event) => {
+    if (event.target !== this.trackTarget) return
+    this.isAnimating = false
+  })
 
     this.createDots()
     this.update()
@@ -29,7 +30,6 @@ export default class extends Controller {
     this.isAnimating = true
 
     this.index = (this.index + direction + this.total) % this.total
-    console.log("index:", this.index)
     this.update()
   }
 
