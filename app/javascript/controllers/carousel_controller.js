@@ -8,41 +8,37 @@ export default class extends Controller {
     this.total = this.trackTarget.children.length
     this.isAnimating = false
 
+  this.trackTarget.addEventListener("transitionend", (event) => {
+    if (event.target !== this.trackTarget) return
+    this.isAnimating = false
+  })
+
     this.createDots()
     this.update()
   }
 
   next() {
-    if (this.isAnimating) return
     this.move(1)
   }
 
   prev() {
-    if (this.isAnimating) return
     this.move(-1)
   }
 
   move(direction) {
+    if (this.isAnimating) return
     this.isAnimating = true
 
     this.index = (this.index + direction + this.total) % this.total
     this.update()
-
-    setTimeout(() => {
-      this.isAnimating = false
-    }, 300)
   }
 
   goTo(index) {
     if (this.isAnimating) return
-    this.isAnimating = true
 
+    this.isAnimating = true
     this.index = index
     this.update()
-
-    setTimeout(() => {
-      this.isAnimating = false
-    }, 300)
   }
 
   update() {
