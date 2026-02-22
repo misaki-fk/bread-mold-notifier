@@ -65,4 +65,4 @@ WORKDIR /rails
 
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 EXPOSE 3000
-CMD ["./bin/rails", "server"]
+CMD ["sh", "-c", "./bin/rails db:migrate && ./bin/rails server"]
