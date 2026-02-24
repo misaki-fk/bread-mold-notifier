@@ -1,4 +1,28 @@
-<div>
-  <h1 class="font-bold text-4xl">Settings#index</h1>
-  <p>Find me in app/views/settings/index.html.erb</p>
-</div>
+<header class="relative bg-primary text-primary-content h-14">
+  <div class="h-full px-4 flex items-center justify-between">
+    
+    <!-- 戻るボタン -->
+    <%= link_to home_path, class: "btn btn-ghost btn-circle" do %>
+      ＜
+     <% end %>
+
+    <!-- タイトル -->
+    <h1 class="text-lg font-bold">
+      設定
+    </h1>
+
+    <!-- 右側余白（バランス用） -->
+    <div class="w-10"></div>
+
+  </div>
+</header>
+
+  <div class="space-y-4 mt-6">
+    <%= link_to "いつも食べるパンの設定", "#", class: "block p-4 bg-base-200 rounded-xl" %>
+  
+    <%= link_to "通知設定", "#", class: "block p-4 bg-base-200 rounded-xl" %>
+  
+    <%= link_to "利用規約", "#", class: "block p-4 bg-base-200 rounded-xl" %>
+  
+    <%= link_to "プライバシーポリシー", "#", class: "block p-4 bg-base-200 rounded-xl" %>
+  </div>
