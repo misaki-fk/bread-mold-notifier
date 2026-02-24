@@ -17,12 +17,26 @@
   </div>
 </header>
 
-  <div class="space-y-4 mt-6">
-    <%= link_to "いつも食べるパンの設定", "#", class: "block p-4 bg-base-200 rounded-xl" %>
-  
-    <%= link_to "通知設定", "#", class: "block p-4 bg-base-200 rounded-xl" %>
-  
-    <%= link_to "利用規約", "#", class: "block p-4 bg-base-200 rounded-xl" %>
-  
-    <%= link_to "プライバシーポリシー", "#", class: "block p-4 bg-base-200 rounded-xl" %>
-  </div>
+<div class="mt-6 mb-4 max-w-lg mx-auto divide-y divide-base-300 px-4">
+
+  <%= link_to "#", class: "flex items-center justify-between py-4" do %>
+    <span>いつも食べるパンの設定</span>
+    <span class="text-base-content/40">›</span>
+  <% end %>
+
+  <%= link_to "#", class: "flex items-center justify-between py-4" do %>
+    <span>通知設定</span>
+    <span class="text-base-content/40">›</span>
+  <% end %>
+
+  <%= link_to "#", class: "flex items-center justify-between py-4" do %>
+    <span>利用規約</span>
+    <span class="text-base-content/40">›</span>
+  <% end %>
+
+  <%= link_to "#", class: "flex items-center justify-between py-4" do %>
+    <span>プライバシーポリシー</span>
+    <span class="text-base-content/40">›</span>
+  <% end %>
+
+</div>
