@@ -1,0 +1,42 @@
+<header class="relative bg-primary text-primary-content h-14">
+  <div class="h-full px-4 flex items-center justify-between">
+    
+    <!-- 戻るボタン -->
+    <%= link_to home_path, class: "btn btn-ghost btn-circle" do %>
+      ＜
+     <% end %>
+
+    <!-- タイトル -->
+    <h1 class="text-lg font-bold">
+      設定
+    </h1>
+
+    <!-- 右側余白（バランス用） -->
+    <div class="w-10"></div>
+
+  </div>
+</header>
+
+<div class="mt-6 mb-4 max-w-lg mx-auto divide-y divide-base-300 px-4">
+
+  <%= link_to "#", class: "flex items-center justify-between py-4" do %>
+    <span>いつも食べるパンの設定</span>
+    <span class="text-base-content/40">›</span>
+  <% end %>
+
+  <%= link_to "#", class: "flex items-center justify-between py-4" do %>
+    <span>通知設定</span>
+    <span class="text-base-content/40">›</span>
+  <% end %>
+
+  <%= link_to "#", class: "flex items-center justify-between py-4" do %>
+    <span>利用規約</span>
+    <span class="text-base-content/40">›</span>
+  <% end %>
+
+  <%= link_to "#", class: "flex items-center justify-between py-4" do %>
+    <span>プライバシーポリシー</span>
+    <span class="text-base-content/40">›</span>
+  <% end %>
+
+</div>

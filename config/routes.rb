@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'settings/index'
   if Rails.env.development?
    require "letter_opener_web"
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
@@ -16,6 +17,8 @@ Rails.application.routes.draw do
   devise_scope :user do
     post "guest_sign_in", to: "guest_sessions#create"
   end
+
+  get 'settings', to: 'settings#index'
 
   get "up" => "rails/health#show", as: :rails_health_check
 end
