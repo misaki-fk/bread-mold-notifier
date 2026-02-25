@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_02_11_042853) do
+ActiveRecord::Schema[7.1].define(version: 2026_02_25_070340) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,6 +33,17 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_11_042853) do
     t.index ["user_id"], name: "index_breads_on_user_id"
   end
 
+  create_table "default_breads", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "bread_type_id", null: false
+    t.integer "total_count"
+    t.float "daily_consumption", default: 1.0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bread_type_id"], name: "index_default_breads_on_bread_type_id"
+    t.index ["user_id"], name: "index_default_breads_on_user_id", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -48,4 +59,6 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_11_042853) do
 
   add_foreign_key "breads", "bread_types"
   add_foreign_key "breads", "users"
+  add_foreign_key "default_breads", "bread_types"
+  add_foreign_key "default_breads", "users"
 end
