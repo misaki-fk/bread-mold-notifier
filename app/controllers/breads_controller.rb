@@ -4,8 +4,17 @@ class BreadsController < ApplicationController
   before_action :set_bread_types, only: [:new, :edit, :create, :update]
 
   def new
-    @bread = Bread.new
-    @bread_types = BreadType.all
+    if current_user.default_bread.present?
+      default = current_user.default_bread
+  
+      @bread = current_user.breads.build(
+        bread_type_id: default.bread_type_id,
+        total_count: default.total_count,
+        daily_consumption: default.daily_consumption
+      )
+    else
+      @bread = current_user.breads.build
+    end
   end
 
   def create
