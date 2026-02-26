@@ -14,7 +14,7 @@ class DefaultBreadsController < ApplicationController
     @default_bread = current_user.build_default_bread(default_bread_params)
 
     if @default_bread.save
-      redirect_to edit_default_bread_path, notice: "いつも食べるパンを設定しました 🍞"
+      redirect_to home_path, notice: "いつも食べるパンを設定しました 🍞"
     else
       flash.now[:alert] = "入力に不備があります"
       render :new, status: :unprocessable_entity
@@ -28,7 +28,7 @@ class DefaultBreadsController < ApplicationController
 
   def update
     if @default_bread.update(default_bread_params)
-      redirect_to edit_default_bread_path, notice: "設定を更新しました 🍞"
+      redirect_to home_path, notice: "いつも食べるパンを更新しました 🍞"
     else
       flash.now[:alert] = "入力に不備があります"
       render :edit, status: :unprocessable_entity
