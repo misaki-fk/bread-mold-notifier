@@ -1,47 +1,11 @@
-<%= form_with model: @bread,
-        local: true,
-        html: {
-          id: "bread-form",
-          data: { signed_in: user_signed_in?,
-                  turbo: false }
-        } do |f| %>
-  <!-- パンの種類 -->
-  <div class="form-control mb-4">
-    <%= f.label :bread_type_id, "パンの種類", class: "label" %>
-    <%= f.collection_select(
-          :bread_type_id,
-          @bread_types,
-          :id,
-          :name,
-          { prompt: "選択してください" },
-          class: "select select-bordered"
-        ) %>
-  </div>
-  <!-- 入り数 -->
-  <div class="form-control mb-4">
-    <%= f.label :total_count, "入り数", class: "label" %>
-    <%= f.number_field :total_count, min: 1, class: "input input-bordered" %>
-  </div>
-  <!-- 1日あたりの消費数 -->
-  <div class="form-control mb-4">
-    <%= f.label :daily_consumption, "1日あたりの消費数", class: "label" %>
-    <%= f.number_field :daily_consumption,
-          min: 1,
-          step: 1,
-          value: 1,
-          class: "input input-bordered" %>
-  </div>
-  <!-- 消費期限 -->
+<%= form_with model: @bread, local: true do |f| %>
+
+  <%= render "shared/bread_fields", f: f %>
+
   <div class="form-control mb-6">
     <%= f.label :expiration_date, "消費期限", class: "label" %>
     <%= f.date_field :expiration_date, class: "input input-bordered" %>
   </div>
-  <!-- ボタン -->
-  <div class="form-control mt-8">
-    <div class="flex justify-center">
-      <%= f.submit @bread.persisted? ? "更新する" : "登録する",
-      class: "btn btn-primary w-48" %>
 
-    </div>
-  </div>
+  <%= f.submit %>
 <% end %>

@@ -20,5 +20,6 @@ Rails.application.routes.draw do
 
   get 'settings', to: 'settings#index'
 
+  resource :default_bread, only: [:new, :create, :edit, :update, :show]
   get "up" => "rails/health#show", as: :rails_health_check
 end
