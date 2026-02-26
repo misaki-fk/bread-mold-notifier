@@ -1,6 +1,7 @@
 class DefaultBreadsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_default_bread
+  before_action :set_bread_types
 
   def new
     # すでに設定があれば編集画面へ
@@ -38,6 +39,10 @@ class DefaultBreadsController < ApplicationController
 
   def set_default_bread
     @default_bread = current_user.default_bread
+  end
+
+  def set_bread_types
+    @bread_types = BreadType.all
   end
 
   def default_bread_params
