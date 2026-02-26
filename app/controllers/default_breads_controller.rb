@@ -35,6 +35,14 @@ class DefaultBreadsController < ApplicationController
     end
   end
 
+  def show
+  if @default_bread.present?
+    redirect_to edit_default_bread_path
+  else
+    redirect_to new_default_bread_path
+  end
+end
+
   private
 
   def set_default_bread

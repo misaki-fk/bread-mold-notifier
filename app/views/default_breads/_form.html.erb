@@ -1,0 +1,8 @@
+<%= form_with model: @default_bread,
+              url: default_bread_path,
+              local: true do |f| %>
+
+  <%= render "shared/bread_fields", f: f %>
+
+  <%= f.submit "保存する", class: "btn btn-primary w-48" %>
+<% end %>
