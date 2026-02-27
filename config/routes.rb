@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'static_pages/terms'
+  get 'static_pages/privacy'
   get 'settings/index'
   if Rails.env.development?
    require "letter_opener_web"
