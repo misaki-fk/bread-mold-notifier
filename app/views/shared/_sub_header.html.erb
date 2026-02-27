@@ -1,0 +1,15 @@
+<header class="relative bg-primary text-primary-content h-14">
+  <div class="h-full px-4 flex items-center justify-between">
+
+    <%= link_to (request.referer || home_path), class: "btn btn-ghost btn-circle" do %>
+      ＜
+    <% end %>
+
+    <h1 class="text-lg font-bold">
+      <%= title %>
+    </h1>
+
+    <div class="w-10"></div>
+
+  </div>
+</header>
