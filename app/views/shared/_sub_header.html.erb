@@ -1,8 +1,7 @@
 <header class="relative bg-primary text-primary-content h-14">
   <div class="h-full px-4 flex items-center justify-between">
 
-    <% safe_back_url = url_from(request.referer) || home_path %>
-    <%= link_to safe_back_url, class: "btn btn-ghost btn-circle" do %>
+    <%= link_to (request.referer || home_path), class: "btn btn-ghost btn-circle" do %>
       ＜
     <% end %>
 
