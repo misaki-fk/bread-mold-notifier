@@ -21,16 +21,17 @@
           が必要です
         </span>
       </h2>
-
-      <div class="flex flex-col items-center gap-4 mt-8">
-        <%= link_to "新規登録", new_user_registration_path,
+      <p class="text-xs text-gray-400 mt-2">
+        ※ゲストデータは引き継がれません
+      </p>
+      <div class="flex flex-col items-center gap-4 mt-6">
+        <%= link_to "新規登録", guest_to_signup_path,
             class: "btn btn-primary w-64 rounded-lg text-base" %>
-
-        <%= link_to "ログイン", new_user_session_path,
+        
+        <%= link_to "ログイン", guest_to_login_path,
             class: "btn btn-outline btn-primary w-64 rounded-lg text-base" %>
-      </div>
 
-      <p class="text-sm text-gray-500 mt-8">
+      <p class="text-sm text-gray-500 mt-4">
         <%= link_to "パスワードを忘れた場合", new_user_password_path,
             class: "link link-primary" %>
       </p>
