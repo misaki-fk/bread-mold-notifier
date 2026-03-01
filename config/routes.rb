@@ -27,5 +27,7 @@ Rails.application.routes.draw do
   get 'terms',   to: 'static_pages#terms'
   get 'privacy', to: 'static_pages#privacy'
 
+  get "guest/signup_prompt", to: "guest#signup_prompt", as: :guest_signup_prompt
+
   get "up" => "rails/health#show", as: :rails_health_check
 end
