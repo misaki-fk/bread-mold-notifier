@@ -1,0 +1,40 @@
+<div class="min-h-screen bg-base-200 flex items-center justify-center px-4">
+  <div class="card bg-base-100 shadow-2xl w-full max-w-md relative">
+
+    <!-- 閉じるボタン -->
+    <div class="absolute right-4 top-4">
+      <%= link_to settings_path,
+          class: "btn btn-ghost btn-sm btn-circle text-gray-400 hover:text-gray-600" do %>
+        ✕
+      <% end %>
+    </div>
+
+    <div class="card-body text-center">
+      <h2 class="text-lg font-bold leading-relaxed space-y-1 mt-8">
+        <span class="block">
+          この機能は設定内容を保存・引き継ぐために
+        </span>
+        <span class="block text-primary">
+          会員登録 / ログイン
+        </span>
+        <span class="block">
+          が必要です
+        </span>
+      </h2>
+      <p class="text-xs text-gray-400 mt-2">
+        ※ゲストデータは引き継がれません
+      </p>
+      <div class="flex flex-col items-center gap-4 mt-6">
+        <%= link_to "新規登録", guest_to_signup_path,
+            class: "btn btn-primary w-64 rounded-lg text-base" %>
+        
+        <%= link_to "ログイン", guest_to_login_path,
+            class: "btn btn-outline btn-primary w-64 rounded-lg text-base" %>
+
+      <p class="text-sm text-gray-500 mt-4">
+        <%= link_to "パスワードを忘れた場合", new_user_password_path,
+            class: "link link-primary" %>
+      </p>
+    </div>
+  </div>
+</div>

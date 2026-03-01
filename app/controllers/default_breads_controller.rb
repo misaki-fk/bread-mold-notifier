@@ -2,6 +2,7 @@ class DefaultBreadsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_default_bread
   before_action :set_bread_types
+  before_action :reject_guest_user
 
   def new
     # すでに設定があれば編集画面へ
