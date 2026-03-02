@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'notification_settings/show'
+  get 'notification_settings/edit'
+  get 'notification_settings/update'
   get 'static_pages/terms'
   get 'static_pages/privacy'
   get 'settings/index'
@@ -30,6 +33,8 @@ Rails.application.routes.draw do
   get "guest/signup_prompt", to: "guest#signup_prompt", as: :guest_signup_prompt
   get "guest/to_signup", to: "guest#to_signup", as: :guest_to_signup
   get "guest/to_login", to: "guest#to_login", as: :guest_to_login
+
+  resource :notification_setting, only: [:show, :edit, :update]
 
   get "up" => "rails/health#show", as: :rails_health_check
 end
