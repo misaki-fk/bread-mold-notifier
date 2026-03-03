@@ -50,6 +50,28 @@
               method: :delete,
               data: { turbo_confirm: "本当に完食しましたか？" },
               class: "btn btn-primary rounded-xl px-6 mt-4" %>
+   
+    <%= link_to line_share_url(bread),
+              target: "_blank",
+              rel: "noopener",
+              class: "flex items-center justify-center gap-2 text-green-600 hover:text-green-800 mt-4" do %>
+  
+    <svg xmlns="http://www.w3.org/2000/svg"
+         fill="none"
+         viewBox="0 0 24 24"
+         stroke-width="1.5"
+         stroke="currentColor"
+         class="w-5 h-5">
+      <path stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
+    </svg>
+  
+    <span>LINEで共有する</span>
+  
+    <% end %>
 
   </div>
+
+
 </div>
