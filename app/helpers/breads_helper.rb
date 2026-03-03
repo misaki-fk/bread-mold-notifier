@@ -9,8 +9,8 @@ module BreadsHelper
     ⭐️ 残り枚数: #{remaining}枚
     TEXT
 
-    encoded_text = ERB::Util.url_encode(share_text)
+    encoded_text = ERB::Util.url_encode(share_text.strip)
 
-    "https://social-plugins.line.me/lineit/share?text=#{encoded_text}"
+    "https://social-plugins.line.me/lineit/share?url=#{encoded_text}"
   end
 end
