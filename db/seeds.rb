@@ -7,5 +7,3 @@ BreadType.destroy_all
 ["食パン", "ロールパン", "その他のパン"].each do |name|
   BreadType.create!(name: name)
 end
-
-puts "パンの種類を初期登録しました！"
