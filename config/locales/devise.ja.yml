@@ -15,3 +15,6 @@ ja:
       updated: "パスワードが変更されました"
       user:
         send_instructions:"パスワード再設定用のメールを送信しました"
+    mailer:
+      reset_password_instructions:
+        subject: "【Pankabi】パスワード再設定のご案内"
