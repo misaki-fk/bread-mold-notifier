@@ -1,6 +1,6 @@
 class DeviseMailer < Devise::Mailer
   def reset_password_instructions(record, token, opts = {})
-    reset_url = edit_password_url(record, reset_password_token: token)
+    reset_url = edit__user_password_url(record, reset_password_token: token)
 
     Resend::Emails.send({
       from: "Pankabi <noreply@pankabi.app>",
