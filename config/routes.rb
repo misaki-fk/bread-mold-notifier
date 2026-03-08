@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'notifications/index'
   get 'notification_settings/show'
   get 'notification_settings/edit'
   get 'notification_settings/update'
@@ -35,6 +36,8 @@ Rails.application.routes.draw do
   get "guest/to_login", to: "guest#to_login", as: :guest_to_login
 
   resource :notification_setting, only: [:show, :edit, :update]
+
+  resources :notifications, only: [:index]
 
   get "up" => "rails/health#show", as: :rails_health_check
 end
