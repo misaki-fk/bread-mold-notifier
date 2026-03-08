@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   end
  
   # 通常ログイン
-  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations', passwords: 'users/passwords' }
+  devise_for :users, controllers: { sessions: 'users/sessions',}
   
   root "top#index"
   get "/home", to: "home#index"
