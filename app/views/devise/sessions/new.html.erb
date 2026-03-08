@@ -2,12 +2,12 @@
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
-  <div class="form-control mb-6 max-w-sm mx-auto">
+  <div class="form-control mb-6 max-w-xs sm:max-w-sm mx-auto">
     <%= f.label :email, "メールアドレス" %>
     <%= f.email_field :email, class: "input input-bordered w-full" %>
   </div>
 
-  <div class="form-control mb-8 max-w-sm mx-auto">
+  <div class="form-control mb-8 max-w-xs sm:max-w-sm mx-auto">
     <%= f.label :password, "パスワード" %>
     <%= f.password_field :password, class: "input input-bordered w-full" %>
   </div>

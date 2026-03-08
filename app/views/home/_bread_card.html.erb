@@ -1,4 +1,4 @@
-<div class="card w-full max-w-sm h-[580px] bg-base-100 shadow-md relative">
+<div class="card w-full max-w-xs sm:max-w-sm sm:h-[580px] bg-base-100 shadow-md relative">
   <div class="flex flex-col items-center justify-center text-center gap-4 p-8 h-full">
     <div class="absolute top-4 right-6">
       <%= link_to edit_bread_path(bread),
@@ -23,7 +23,7 @@
           <%= bread.bread_type.name %>
         </span>
     </p>
-    <p class="text-2xl font-bold mt-2">
+    <p class="text-lg sm:text-2xl font-bold mt-2">
       <%= bread.status_message %>
     </p>
     <span class="bg-yellow-100 p-4 mt-4 rounded-2xl inline-block w-60">
