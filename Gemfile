@@ -73,6 +73,7 @@ gem "tailwindcss-rails", "~> 3.3.2"
 gem "rspec-rails", "~> 7.1", :groups => [:development, :test]
 
 gem "devise"
+gem "devise-i18n"
 
 gem "rails-i18n"
 
