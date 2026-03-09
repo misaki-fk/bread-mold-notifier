@@ -2,7 +2,7 @@
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name)) do |f| %>
 
-  <div class="form-control mb-12 max-w-sm mx-auto">
+  <div class="form-control mb-12 max-w-xs mx-auto">
     <%= f.label :email, "メールアドレス" %>
     <%= f.email_field :email, class: "input input-bordered w-full", autofocus: true %>
   </div>

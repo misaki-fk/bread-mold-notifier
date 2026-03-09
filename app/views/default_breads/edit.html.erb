@@ -1,9 +1,9 @@
 <%= render "shared/sub_header", title: "いつも食べるパンの設定", back_path: settings_path %>
 <div class="bg-base-200 min-h-screen pt-10">
-  <div class="max-w-md mx-auto ">
+  <div class="max-w-md mx-auto">
     <div class="card bg-base-100 shadow-xl relative">
       <div class="card-body">
-        <h2 class="card-title text-xl mb-4">🍞 いつも食べるパンを登録しておく</h2>
+        <h2 class="card-title text-lg mb-2">🍞いつも食べるパンを登録しておく</h2>
         <p class="text-gray-500 mb-4">こちらの設定を行うことで、次回からのパンの選択がスムーズになります。</p>
         <%= render "form", default_bread: @default_bread, bread_types: @bread_types %>
       </div>
