@@ -6,7 +6,7 @@ module BreadsHelper
 🍞 Pankabi
 
 🏠 家のパン情報
-🍞 うちの#{bread.bread_type.name}
+🍞 #{bread.bread_type.name}
 ⏰ 消費期限: #{bread.expiration_date.strftime('%Y.%m.%d')}
 ⭐️ のこり数: #{remaining}
 
