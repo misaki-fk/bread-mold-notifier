@@ -23,3 +23,13 @@
   <% end %>
 
 </div>
+
+<% if user_signed_in? %>
+  <div class="text-center text-sm opacity-60 mt-10 max-w-lg mx-auto px-4">
+    <%= button_to "ログアウト",
+      destroy_user_session_path,
+      method: :delete,
+      data: { turbo: false },
+      class: "btn btn-ghost btn-xs" %>
+  </div>
+<% end %>
