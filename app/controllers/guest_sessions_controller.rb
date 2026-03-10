@@ -1,4 +1,4 @@
-class GuestSessionsController < Devise::SessionsController
+class GuestSessionsController < ApplicationController
   def create
     # 既にログインしている場合はログアウト
     sign_out_all_scopes if user_signed_in?
@@ -20,7 +20,7 @@ class GuestSessionsController < Devise::SessionsController
       }
     end
 
-    sign_in(user)
+    sign_in(:user, user)
     redirect_to home_path, notice: "パン管理をはじめましょう！"
   end
 end
