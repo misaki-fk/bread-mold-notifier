@@ -20,7 +20,7 @@ class GuestSessionsController < ApplicationController
       }
     end
 
-    sign_in(user)
+    sign_in(:user, user)
     redirect_to home_path, notice: "パン管理をはじめましょう！"
   end
 end
