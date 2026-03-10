@@ -1,8 +1,12 @@
 class GuestSessionsController < Devise::SessionsController
   def create
-    # ブラウザから送られた guest_user_id を取得
+    # 既にログインしている場合はログアウト
+    sign_out_all_scopes if user_signed_in?
+  
+    user = nil
     guest_user_id = cookies.signed[:guest_user_id]
-
+    
+    # ブラウザから送られた guest_user_id を取得
     if guest_user_id.present?
       user = User.find_by(id: guest_user_id, guest: true)
     end
