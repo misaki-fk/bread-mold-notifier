@@ -10,7 +10,15 @@ class Users::SessionsController < Devise::SessionsController
   # GET /users/sign_in
   # def new
   #   super
-  # end
+  def destroy
+    if current_user&.guest?
+      super do
+        flash.delete(:notice)
+      end
+    else
+      super
+    end
+  end
 
   # POST /users/sign_in
   # def create
