@@ -48,6 +48,18 @@ class BreadsController < ApplicationController
     redirect_to home_path, notice: "完食しました！ 🍞"
   end
 
+  def increase
+    bread = Bread.find(params[:id])
+    bread.increment!(:adjustment_count)
+    redirect_to breads_path
+  end
+
+  def decrease
+    bread = Bread.find(params[:id])
+    bread.decrement!(:adjustment_count)
+    redirect_to breads_path
+  end
+
   private
 
   def set_bread
