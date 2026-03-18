@@ -5,7 +5,10 @@ class Users::SessionsController < Devise::SessionsController
   def create
     cookies.delete(:guest_user_id)
     cookies.signed[:guest_user_id] = nil
-    super
+    
+    super do |resource|
+      resource.remember_me = true
+    end
   end
   # GET /users/sign_in
   # def new
