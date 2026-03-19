@@ -5,6 +5,12 @@
     <div class="card bg-base-100 shadow-md">
       <div class="card-body text-center">
 
+      <% if @notifications.empty? %>
+        <p style="text-align: center; padding: 20px; color: #888;">
+          通知はまだありません
+        </p>
+      <% end %>
+
         <% @notifications.each do |notification| %>
           <div style="border-bottom: 1px solid #ccc; padding: 10px;">
 

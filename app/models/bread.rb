@@ -1,4 +1,5 @@
 class Bread < ApplicationRecord
+  has_many :notifications, dependent: :destroy
   belongs_to :user, optional: true
   belongs_to :bread_type
   validates :expiration_date, presence: true
