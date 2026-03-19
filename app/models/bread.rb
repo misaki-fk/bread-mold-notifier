@@ -1,4 +1,5 @@
 class Bread < ApplicationRecord
+  has_many :notifications, dependent: :destroy
   belongs_to :user, optional: true
   belongs_to :bread_type
   validates :expiration_date, presence: true
@@ -10,7 +11,7 @@ class Bread < ApplicationRecord
   }
 
   # 消費期限までの日数
-  def  days_until_expiration
+  def days_until_expiration
     return nil unless expiration_date
 
     (expiration_date - Date.today).to_i
@@ -51,10 +52,45 @@ class Bread < ApplicationRecord
     end
   end
 
+  after_commit :notify_if_needed, on: [:create, :update]
+
+
   private
 
   def set_remaining_count
     self.remaining_count = total_count
   end
 
+  def notify_if_needed
+    # ① 期限今日
+    if expiration_date == Time.zone.today
+      create_notification("expiration_today", "パンの消費期限が今日までです！")
+    end
+  
+    # ② 明日在庫切れ
+    if daily_consumption > 0
+      tomorrow_remaining = remaining_count - daily_consumption
+  
+      if tomorrow_remaining <= 0 && remaining_count > 0
+        create_notification("run_out_tomorrow", "明日パンの在庫がなくなります！")
+      end
+    end
+  end
+
+  def create_notification(type, message)
+  return if Notification.exists?(
+    user: user,
+    bread: self,
+    notification_type: type,
+    created_at: Time.zone.today.all_day
+  )
+
+  Notification.create!(
+    user: user,
+    bread: self,
+    notification_type: type,
+    message: message,
+    notified_at: Time.zone.now
+  )
+  end
 end

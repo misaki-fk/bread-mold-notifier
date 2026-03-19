@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_03_15_111555) do
+ActiveRecord::Schema[7.1].define(version: 2026_03_19_045106) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -45,6 +45,19 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_15_111555) do
     t.index ["user_id"], name: "index_default_breads_on_user_id", unique: true
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "bread_id", null: false
+    t.string "notification_type", null: false
+    t.string "message", null: false
+    t.boolean "is_read", default: false, null: false
+    t.datetime "notified_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bread_id"], name: "index_notifications_on_bread_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -62,4 +75,6 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_15_111555) do
   add_foreign_key "breads", "users"
   add_foreign_key "default_breads", "bread_types"
   add_foreign_key "default_breads", "users"
+  add_foreign_key "notifications", "breads"
+  add_foreign_key "notifications", "users"
 end
