@@ -6,7 +6,7 @@
 
 ## サービスURL
 パンの在庫管理アプリ「Pankabi」
-https://bread-mold-notifier.onrender.com
+https://pankabi.com
 
 ## このサービスへの思い・作りたい理由
 私は昔から朝食はパン派です。
