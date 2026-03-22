@@ -41,18 +41,7 @@
         <p class="text-lg font-semibold">
           のこり数
         </p>
-
-        <div class="flex items-center justify-center gap-8 mt-2">
-          <%= button_to "-", decrease_bread_path(bread), method: :patch,
-            class: "text-2xl font-bold text-gray-600 hover:text-red-500" %>
-    
-          <p class="text-3xl font-bold w-16 text-center">
-            <%= bread.remaining_count %>
-          </p>
-    
-          <%= button_to "+", increase_bread_path(bread), method: :patch,
-            class: "text-2xl font-bold text-gray-600 hover:text-green-500" %>
-        </div>
+        <%= render "home/bread_count", bread: bread %>
       </span>
     </div>
 

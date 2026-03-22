@@ -1,6 +1,6 @@
 class BreadsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
-  before_action :set_bread, only: [:edit, :update]
+  before_action :set_bread, only: [:edit, :update, :increase, :decrease]
   before_action :set_bread_types, only: [:new, :edit, :create, :update]
 
   def new
@@ -49,15 +49,21 @@ class BreadsController < ApplicationController
   end
 
   def increase
-    bread = Bread.find(params[:id])
-    bread.increment!(:adjustment_count)
-    redirect_to breads_path
+    @bread = Bread.find(params[:id])
+    @bread.increment!(:adjustment_count)
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to home_path }
+    end
   end
 
   def decrease
-    bread = Bread.find(params[:id])
-    bread.decrement!(:adjustment_count)
-    redirect_to breads_path
+    @bread.decrement!(:adjustment_count)
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to home_path }
+    end
   end
 
   private

@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "bread_#{@bread.id}_count" do %>
+  <%= render "home/bread_count", bread: @bread %>
+<% end %>
