@@ -13,16 +13,25 @@ class OcrService
 
   private
 
-  def self.extract_best_date(text)
-    dates = extract_dates(text)
-
+   def self.extract_best_date(text)
+    lines = text.split("\n")
+  
+    # 🔥 消費期限がある行を優先
+    target_line = lines.find { |line| line.include?("消費期限") }
+  
+    # なければ全体
+    target_line ||= text
+  
+    dates = extract_dates(target_line)
     parsed_dates = dates.map { |d| normalize_date(d) }.compact
-
-    # 未来の日付を優先
+  
+    return nil if parsed_dates.empty?
+  
+    # 念のため未来優先
     future_dates = parsed_dates.select { |d| d >= Date.today }
-
+  
     return future_dates.min if future_dates.any?
-
+  
     parsed_dates.min
   end
 
