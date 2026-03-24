@@ -4,19 +4,20 @@
 
   <div class="form-control mb-4">
     <%= f.label :expiration_date, "消費期限", class: "label" %>
-  
+
     <!-- 手動入力 -->
     <%= f.date_field :expiration_date, id: "expirationField", class: "input input-bordered mb-2" %>
-  
+    <p id="ocrStatus" class="text-sm text-gray-500 mt-1"></p>
     <!-- 区切り -->
     <div class="text-center text-sm text-gray-400 my-2">または</div>
-  
+
     <!-- OCR -->
     <label class="btn btn-outline w-full cursor-pointer">
       📷 画像から自動入力
       <input type="file" id="imageInput" accept="image/*" class="hidden">
     </label>
   </div>
+
 
    <!-- ボタン -->
   <div class="form-control mt-8">
