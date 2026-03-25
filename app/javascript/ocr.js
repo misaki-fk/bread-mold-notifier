@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("imageInput")
   const status = document.getElementById("ocrStatus")
   if (!input) return
-
   input.addEventListener("change", async (e) => {
     const file = e.target.files[0]
     if (!file) return
@@ -19,6 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
       })
 
       const data = await res.json()
+
+      alert(JSON.stringify(data)) // ←ここ！！！！！
 
       if (data.expiration) {
         document.getElementById("expirationField").value = data.expiration

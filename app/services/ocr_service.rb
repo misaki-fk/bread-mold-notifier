@@ -7,6 +7,9 @@ class OcrService
 
     response = vision.text_detection image: image_path
     text = response.responses.first.text_annotations.first.description
+    puts "===== OCR RESULT ====="
+    puts text
+    puts "======================"
 
     extract_best_date(text)
   end
@@ -17,7 +20,7 @@ class OcrService
     lines = text.split("\n")
   
     # 🔥 消費期限がある行を優先
-    target_line = lines.find { |line| line.include?("消費期限") }
+    target_line = lines.find { |line| line.match?(/消費|賞味/) }
   
     # なければ全体
     target_line ||= text
@@ -37,7 +40,7 @@ class OcrService
 
   def self.extract_dates(text)
     patterns = [
-      /\d{2}\.\d{2}\.\d{2}/,
+      /\d{2}\.\d{1,2}\.\d{1,2}/,   #2桁と1桁両方に対応できるよう修正
       /\d{4}[\/\.\-]\d{1,2}[\/\.\-]\d{1,2}/
     ]
 
