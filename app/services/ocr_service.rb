@@ -1,9 +1,17 @@
 require "google/cloud/vision"
 require "date"
+require "json"
 
 class OcrService
   def self.extract_expiration(image_path)
-    vision = Google::Cloud::Vision.image_annotator
+    if ENV["GOOGLE_CREDENTIALS_JSON"]
+      credentials = JSON.parse(ENV["GOOGLE_CREDENTIALS_JSON"])
+      vision = Google::Cloud::Vision::ImageAnnotator.new(
+        credentials: credentials
+      )
+    else
+      vision = Google::Cloud::Vision.image_annotator
+    end
 
     response = vision.text_detection image: image_path
     text = response.responses.first.text_annotations.first.description
