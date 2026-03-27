@@ -1,7 +1,7 @@
 document.addEventListener("turbo:load", () => {
   const input = document.getElementById("imageInput")
   const status = document.getElementById("ocrStatus")
-  if (!input) return
+  if (!input || !status) return
   input.addEventListener("change", async (e) => {
     const file = e.target.files[0]
     if (!file) return
@@ -20,7 +20,7 @@ document.addEventListener("turbo:load", () => {
       const data = await res.json()
 
       alert(JSON.stringify(data)) 
-      
+
       if (data.expiration) {
         document.getElementById("expirationField").value = data.expiration
         status.textContent = ""

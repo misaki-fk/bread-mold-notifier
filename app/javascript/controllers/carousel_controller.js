@@ -4,6 +4,7 @@ export default class extends Controller {
   static targets = ["track", "dots"]
 
   connect() {
+    console.log("carousel connected")
     this.index = 0
     this.total = this.trackTarget.children.length
     this.isAnimating = false
