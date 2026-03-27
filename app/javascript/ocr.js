@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("turbo:load", () => {
   const input = document.getElementById("imageInput")
   const status = document.getElementById("ocrStatus")
   if (!input) return
@@ -19,8 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const data = await res.json()
 
-      alert(JSON.stringify(data)) // ←ここ！！！！！
-
+      alert(JSON.stringify(data)) 
+      
       if (data.expiration) {
         document.getElementById("expirationField").value = data.expiration
         status.textContent = ""
