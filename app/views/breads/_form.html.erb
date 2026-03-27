@@ -1,20 +1,29 @@
-<%= form_with model: @bread, local: true do |f| %>
+<%= form_with model: @bread, local: true, data: { controller: "ocr" } do |f| %>
 
   <%= render "shared/bread_fields", f: f %>
 
   <div class="form-control mb-4">
     <%= f.label :expiration_date, "消費期限", class: "label" %>
 
+
+
     <!-- 手動入力 -->
-    <%= f.date_field :expiration_date, id: "expirationField", class: "input input-bordered mb-2" %>
-    <p id="ocrStatus" class="text-sm text-gray-500 mt-1"></p>
+    <%= f.date_field :expiration_date,
+    data: { ocr_target: "field" },
+    class: "input input-bordered mb-2" %>
+
+    <p data-ocr-target="status" class="text-sm text-gray-500 mt-1"></p>
+  
     <!-- 区切り -->
     <div class="text-center text-sm text-gray-400 my-2">または</div>
 
-    <!-- OCR -->
+    <!-- OCR -->  
     <label class="btn btn-outline w-full cursor-pointer">
       📷 画像から自動入力
-      <input type="file" id="imageInput" accept="image/*" class="hidden">
+      <input type="file"
+             data-ocr-target="input"
+             accept="image/*"
+             class="hidden">
     </label>
   </div>
 
