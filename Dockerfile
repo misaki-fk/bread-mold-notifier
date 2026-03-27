@@ -30,12 +30,9 @@ RUN bundle install && \
 
 # Node モジュールインストール（DaisyUI 含む）
 COPY package.json package-lock.json ./
-RUN npm install
 
 # アプリコードコピー
 COPY . .
-
-RUN npm run build
 
 # bootsnap precompile
 RUN bundle exec bootsnap precompile app/ lib/

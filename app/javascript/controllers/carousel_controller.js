@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-
+console.log("carousel connected")
 export default class extends Controller {
   static targets = ["track", "dots"]
 
