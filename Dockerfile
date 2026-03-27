@@ -35,6 +35,8 @@ RUN npm install
 # アプリコードコピー
 COPY . .
 
+RUN npm run build
+
 # bootsnap precompile
 RUN bundle exec bootsnap precompile app/ lib/
 
