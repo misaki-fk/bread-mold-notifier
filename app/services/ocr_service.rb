@@ -18,12 +18,12 @@ class OcrService
       raise
     end
 
-    # 🔥 ここが重要
+    # ここが重要
     file = Tempfile.new("gcp.json")
     file.write(credentials.to_json)
     file.rewind
 
-    # 🔥 ここも重要（環境変数にセット）
+    # ここも重要（環境変数にセット）
     ENV["GOOGLE_APPLICATION_CREDENTIALS"] = file.path
 
     begin
@@ -42,7 +42,9 @@ class OcrService
       raise
     end
 
-    response
+    text = response.responses.first.text_annotations.first.description
+    Rails.logger.info "OCR TEXT: #{text}"
+    extract_best_date(text)
   end
 
   private
