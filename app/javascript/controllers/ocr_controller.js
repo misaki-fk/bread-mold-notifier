@@ -26,9 +26,7 @@ export default class extends Controller {
     fetch("/ocr", {
       method: "POST",
       body: formData,
-      headers: {
-        "X-CSRF-Token": csrfToken
-      }
+      headers: headers
     })
       .then(res => {
         if (!res.ok) {
