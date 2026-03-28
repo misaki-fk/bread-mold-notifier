@@ -3,36 +3,37 @@ require "date"
 require "json"
 
 class OcrService
-def self.extract_expiration(image_path)
-  Rails.logger.debug "=== OCR START ==="
-
-  raw = ENV["GOOGLE_CREDENTIALS_JSON"]
-  Rails.logger.debug "ENV exists?: #{raw.present?}"
-
-  begin
-    credentials = JSON.parse(raw)
-    Rails.logger.debug "JSON parse OK"
-  rescue => e
-    Rails.logger.error "JSON parse ERROR: #{e.message}"
-    raise
-  end
-
-  begin
-    vision = Google::Cloud::Vision.image_annotator(
-      credentials: credentials
-    )
-    Rails.logger.debug "Vision client created"
-  rescue => e
-    Rails.logger.error "Vision client ERROR: #{e.message}"
-    raise
-  end
-
-  begin
-    response = vision.text_detection image: image_path
-    Rails.logger.debug "Vision API called"
-  rescue => e
-    Rails.logger.error "Vision API ERROR: #{e.message}"
-    raise
+  def self.extract_expiration(image_path)
+    Rails.logger.debug "=== OCR START ==="
+  
+    raw = ENV["GOOGLE_CREDENTIALS_JSON"]
+    Rails.logger.debug "ENV exists?: #{raw.present?}"
+  
+    begin
+      credentials = JSON.parse(raw)
+      Rails.logger.debug "JSON parse OK"
+    rescue => e
+      Rails.logger.error "JSON parse ERROR: #{e.message}"
+      raise
+    end
+  
+    begin
+      vision = Google::Cloud::Vision.image_annotator(
+        credentials: credentials
+      )
+      Rails.logger.debug "Vision client created"
+    rescue => e
+      Rails.logger.error "Vision client ERROR: #{e.message}"
+      raise
+    end
+  
+    begin
+      response = vision.text_detection image: image_path
+      Rails.logger.debug "Vision API called"
+    rescue => e
+      Rails.logger.error "Vision API ERROR: #{e.message}"
+      raise
+    end
   end
 
   private
