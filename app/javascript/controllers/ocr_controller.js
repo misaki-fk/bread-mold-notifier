@@ -25,11 +25,15 @@ export default class extends Controller {
 
     fetch("/ocr", {
       method: "POST",
-      headers,
-      body: formData
+      body: formData,
+      headers: {
+        "X-CSRF-Token": csrfToken
+      }
     })
       .then(res => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status}`)
+        }
         return res.json()
       })
       .then(data => {
