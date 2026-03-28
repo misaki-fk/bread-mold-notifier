@@ -6,7 +6,7 @@ class OcrService
   def self.extract_expiration(image_path)
     if ENV["GOOGLE_CREDENTIALS_JSON"]
       credentials = JSON.parse(ENV["GOOGLE_CREDENTIALS_JSON"])
-      vision = Google::Cloud::Vision::ImageAnnotator.new(
+      vision = Google::Cloud::Vision.image_annotator(
         credentials: credentials
       )
     else
