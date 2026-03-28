@@ -44,7 +44,6 @@ class OcrService
 
     response
   end
-end
 
   private
 
