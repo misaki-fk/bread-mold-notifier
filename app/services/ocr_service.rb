@@ -1,17 +1,49 @@
 require "google/cloud/vision"
 require "date"
 require "json"
+require "tempfile"
 
 class OcrService
   def self.extract_expiration(image_path)
+    Rails.logger.info "=== OCR START ==="
+
+    raw = ENV["GOOGLE_CREDENTIALS_JSON"]
+    Rails.logger.info "ENV exists?: #{raw.present?}"
+
+    begin
+      credentials = JSON.parse(raw)
+      Rails.logger.info "JSON parse OK"
+    rescue => e
+      Rails.logger.error "JSON parse ERROR: #{e.message}"
+      raise
+    end
+
+    # ここが重要
+    file = Tempfile.new("gcp.json")
+    file.write(credentials.to_json)
+    file.rewind
+
+    # ここも重要（環境変数にセット）
+    ENV["GOOGLE_APPLICATION_CREDENTIALS"] = file.path
+
+    begin
       vision = Google::Cloud::Vision.image_annotator
+      Rails.logger.info "Vision client created"
+    rescue => e
+      Rails.logger.error "Vision client ERROR: #{e.message}"
+      raise
+    end
 
-    response = vision.text_detection image: image_path
+    begin
+      response = vision.text_detection image: image_path
+      Rails.logger.info "Vision API called"
+    rescue => e
+      Rails.logger.error "Vision API ERROR: #{e.message}"
+      raise
+    end
+
     text = response.responses.first.text_annotations.first.description
-    puts "===== OCR RESULT ====="
-    puts text
-    puts "======================"
-
+    Rails.logger.info "OCR TEXT: #{text}"
     extract_best_date(text)
   end
 
@@ -20,7 +52,7 @@ class OcrService
    def self.extract_best_date(text)
     lines = text.split("\n")
   
-    # 🔥 消費期限がある行を優先
+    # 消費期限がある行を優先
     target_line = lines.find { |line| line.match?(/消費|賞味/) }
   
     # なければ全体
