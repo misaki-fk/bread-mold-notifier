@@ -1,29 +1,30 @@
 import { Controller } from "@hotwired/stimulus"
+console.log("OCR LOADED")
 
 export default class extends Controller {
   static targets = ["input", "status", "field"]
 
   connect() {
     console.log("OCR controller connected")
+  }
 
-    this.inputTarget.addEventListener("change", async (e) => {
-      const file = e.target.files[0]
-      if (!file) return
+  upload(event) {
+    console.log("upload called") // ←確認用
 
-      this.statusTarget.textContent = "読み取り中..."
+    const file = event.target.files[0]
+    if (!file) return
 
-      const formData = new FormData()
-      formData.append("image", file)
+    this.statusTarget.textContent = "読み取り中..."
 
-      try {
-        const res = await fetch("/ocr", {
-          method: "POST",
-          body: formData
-        })
+    const formData = new FormData()
+    formData.append("image", file)
 
-        const data = await res.json()
-
-        alert(JSON.stringify(data))
+    fetch("/ocr", {
+      method: "POST",
+      body: formData
+    })
+      .then(res => res.json())
+      .then(data => {
 
         if (data.expiration) {
           this.fieldTarget.value = data.expiration
@@ -31,10 +32,10 @@ export default class extends Controller {
         } else {
           this.statusTarget.textContent = "読み取れませんでした"
         }
-      } catch (error) {
+      })
+      .catch(error => {
         console.error(error)
         this.statusTarget.textContent = "エラーが発生しました"
-      }
-    })
+      })
   }
 }
