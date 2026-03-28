@@ -19,11 +19,19 @@ export default class extends Controller {
     const formData = new FormData()
     formData.append("image", file)
 
+    const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content')
+    const headers = {}
+    if (token) headers['X-CSRF-Token'] = token
+
     fetch("/ocr", {
       method: "POST",
+      headers,
       body: formData
     })
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+        return res.json()
+      })
       .then(data => {
 
         if (data.expiration) {
