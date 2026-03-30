@@ -7,45 +7,39 @@ class OcrService
   def self.extract_expiration(image_path)
     Rails.logger.info "=== OCR START ==="
 
-    raw = ENV["GOOGLE_CREDENTIALS_JSON"]
-    Rails.logger.info "ENV exists?: #{raw.present?}"
+    if ENV["GOOGLE_CREDENTIALS_JSON"].present?
+      Rails.logger.info "Using JSON credentials"
 
-    begin
+      raw = ENV["GOOGLE_CREDENTIALS_JSON"]
       credentials = JSON.parse(raw)
-      Rails.logger.info "JSON parse OK"
-    rescue => e
-      Rails.logger.error "JSON parse ERROR: #{e.message}"
-      raise
+
+      file = Tempfile.new("gcp.json")
+      file.write(credentials.to_json)
+      file.rewind
+
+      ENV["GOOGLE_APPLICATION_CREDENTIALS"] = file.path
+
+    elsif ENV["GOOGLE_APPLICATION_CREDENTIALS"].present?
+      Rails.logger.info "Using file credentials"
+
+      # 何もしない（そのまま使う）
+
+    else
+      raise "No Google credentials found"
     end
 
-    # ここが重要
-    file = Tempfile.new("gcp.json")
-    file.write(credentials.to_json)
-    file.rewind
+    vision = Google::Cloud::Vision.image_annotator
+    Rails.logger.info "Vision client created"
 
-    # ここも重要（環境変数にセット）
-    ENV["GOOGLE_APPLICATION_CREDENTIALS"] = file.path
+    response = vision.text_detection image: image_path
+    Rails.logger.info "Vision API called"
 
-    begin
-      vision = Google::Cloud::Vision.image_annotator
-      Rails.logger.info "Vision client created"
-    rescue => e
-      Rails.logger.error "Vision client ERROR: #{e.message}"
-      raise
-    end
-
-    begin
-      response = vision.text_detection image: image_path
-      Rails.logger.info "Vision API called"
-    rescue => e
-      Rails.logger.error "Vision API ERROR: #{e.message}"
-      raise
-    end
-
-    text = response.responses.first.text_annotations.first.description
+    text = response.responses.first.text_annotations.first&.description
     Rails.logger.info "OCR TEXT: #{text}"
+
     extract_best_date(text)
   end
+
 
   private
 
