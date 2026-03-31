@@ -51,6 +51,9 @@ class OcrService
   
     # なければ全体
     target_line ||= text
+
+    # 空白を削除
+    target_line = target_line.gsub(/\s+/, "")
   
     dates = extract_dates(target_line)
     parsed_dates = dates.map { |d| normalize_date(d) }.compact
