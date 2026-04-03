@@ -96,6 +96,11 @@ Rails.application.configure do
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
   config.action_mailer.default_url_options = {
     host: "pankabi.com",
-    protocol: "https"
+    protocol: "https",
   }
+
+  config.action_mailer.default_options = {
+  from: "no-reply@pankabi.com"
+  }
+
 end
