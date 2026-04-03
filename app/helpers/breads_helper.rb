@@ -10,7 +10,7 @@ module BreadsHelper
 ⏰ 消費期限: #{bread.expiration_date.strftime('%Y.%m.%d')}
 ⭐️ のこり数: #{remaining}
 
-https://bread-mold-notifier.onrender.com
+https://pankabi.com
 TEXT
 
     encoded_text = ERB::Util.url_encode(share_text.strip)
