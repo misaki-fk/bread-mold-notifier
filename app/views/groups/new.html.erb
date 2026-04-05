@@ -1,0 +1,8 @@
+<h1>グループ作成</h1>
+
+<%= form_with model: @group do |f| %>
+  <%= f.text_field :name, placeholder: "グループ名" %>
+  <%= f.text_area :description, placeholder: "説明（任意）" %>
+
+  <%= f.submit "作成" %>
+<% end %>

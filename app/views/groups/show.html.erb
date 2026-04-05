@@ -1,0 +1,23 @@
+<h1><%= @group.name %></h1>
+
+<p>メンバー</p>
+<ul>
+  <% @group.users.each do |user| %>
+    <li><%= user.name %></li>
+  <% end %>
+</ul>
+
+<!-- 招待ボタン -->
+<%= button_to "＋ 招待する",
+      group_invitations_path(@group),
+      method: :post %>
+
+<!-- 招待リンク表示 -->
+<% if params[:invite_token] %>
+  <div>
+    <p>招待リンク</p>
+    <input type="text"
+           value="<%= invite_url(params[:invite_token]) %>"
+           readonly>
+  </div>
+<% end %>

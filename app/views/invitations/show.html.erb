@@ -1,0 +1,7 @@
+<h1>招待されています</h1>
+
+<p><%= @group.name %> に参加しますか？</p>
+
+<%= button_to "参加する",
+      invite_path(params[:token]),
+      method: :post %>
