@@ -22,10 +22,6 @@ class Bread < ApplicationRecord
     days_passed = (Date.current - created_at.to_date).to_i
     consumed = daily_consumption * days_passed
     remaining = total_count - consumed + adjustment_count
-  
-     remaining = remaining.to_i
-    remaining.positive? ? remaining : 0
-
   end
 
   def increase_adjustment!
