@@ -4,9 +4,9 @@ class BreadsController < ApplicationController
   before_action :set_bread_types, only: [:new, :edit, :create, :update]
 
   def new
-    if current_group.default_bread.present?
-      default = current_group.default_bread
-  
+    if current_user.default_bread.present?
+      default = current_user.default_bread
+
       @bread = current_group.breads.build(
         bread_type_id: default.bread_type_id,
         total_count: default.total_count,
@@ -19,6 +19,7 @@ class BreadsController < ApplicationController
 
   def create
     @bread = current_group.breads.build(bread_params)
+    @bread.user = current_user
 
     if @bread.save
       redirect_to home_path, notice: "パンを登録しました 🍞"
