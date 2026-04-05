@@ -6,19 +6,20 @@ class BreadsController < ApplicationController
   def new
     if current_user.default_bread.present?
       default = current_user.default_bread
-  
-      @bread = current_user.breads.build(
+
+      @bread = current_group.breads.build(
         bread_type_id: default.bread_type_id,
         total_count: default.total_count,
         daily_consumption: default.daily_consumption
       )
     else
-      @bread = current_user.breads.build
+      @bread = current_group.breads.build
     end
   end
 
   def create
-    @bread = current_user.breads.build(bread_params)
+    @bread = current_group.breads.build(bread_params)
+    @bread.user = current_user
 
     if @bread.save
       redirect_to home_path, notice: "パンを登録しました 🍞"
@@ -43,13 +44,13 @@ class BreadsController < ApplicationController
   end
 
   def destroy
-    @bread = current_user.breads.find(params[:id])
+    @bread = current_group.breads.find(params[:id])
     @bread.destroy
     redirect_to home_path, notice: "完食しました！ 🍞"
   end
 
   def increase
-    @bread = Bread.find(params[:id])
+    @bread = current_group.breads.find(params[:id])
     @bread.increment!(:adjustment_count)
 
     respond_to do |format|
@@ -69,7 +70,7 @@ class BreadsController < ApplicationController
   private
 
   def set_bread
-    @bread = current_user.breads.find(params[:id])
+    @bread = current_group.breads.find(params[:id])
   end
 
   def set_bread_types

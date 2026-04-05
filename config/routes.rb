@@ -47,4 +47,12 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   post "/ocr", to: "ocrs#create"
+
+  # グループ関連
+  resources :groups, only: [] do
+    member do
+      patch :switch
+    end
+  end
+
 end

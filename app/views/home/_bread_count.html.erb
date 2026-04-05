@@ -2,9 +2,23 @@
   <div class="flex items-center justify-center gap-8 mt-2">
     <%= button_to "-", decrease_bread_path(bread), method: :patch,
       class: "text-2xl font-bold text-gray-600 hover:text-red-500" %>
-    <p class="text-3xl font-bold w-16 text-center">
-      <%= bread.remaining_count %>
-    </p>
+    <div class="relative w-16 text-center">
+
+      <% remaining = bread.remaining_count %>
+          
+      <!-- 中央の0 -->
+      <span class="text-3xl font-bold">
+        <%= [remaining, 0].max %>
+      </span>
+
+      <!-- マイナス -->
+      <% if remaining < 0 %>
+        <span class="absolute left-1/2 top-1/2 translate-x-3 -translate-y-1/2 text-sm text-red-500">
+          （<%= remaining %>）
+        </span>
+      <% end %>
+          
+    </div>
     <%= button_to "+", increase_bread_path(bread), method: :patch,
       class: "text-2xl font-bold text-gray-600 hover:text-green-500" %>
   </div>
