@@ -10,6 +10,13 @@ class ApplicationController < ActionController::Base
   def after_sign_out_path_for(resource_or_scope)
     root_path
   end
+
+  def current_group
+    @current_group ||= current_user.groups.first
+  end
+    helper_method :current_group
+  end
+  
   private
 
   def reject_guest_user
