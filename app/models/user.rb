@@ -2,6 +2,9 @@ class User < ApplicationRecord
   has_many :breads, dependent: :destroy
   has_one :default_bread, dependent: :destroy
   has_many :notifications, dependent: :destroy
+  has_many :memberships, dependent: :destroy
+  has_many :groups, through: :memberships
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -14,5 +17,13 @@ class User < ApplicationRecord
       password: SecureRandom.hex(10),
       guest: true
     )
+  end
+
+  # ユーザー作成後に個人用グループを作成する
+  after_create :create_personal_group
+
+  def create_personal_group
+    group = Group.create!(name: "マイパン")
+    memberships.create!(group: group)
   end
 end
