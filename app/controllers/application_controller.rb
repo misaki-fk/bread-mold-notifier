@@ -12,11 +12,18 @@ class ApplicationController < ActionController::Base
   end
 
   def current_group
+    return @current_group if defined?(@current_group)
+  
+    @current_group =
+      if session[:group_id]
+        current_user.groups.find_by(id: session[:group_id])
+      end
+  
     @current_group ||= current_user.groups.first
   end
-    helper_method :current_group
-  end
-  
+
+  helper_method :current_group
+
   private
 
   def reject_guest_user

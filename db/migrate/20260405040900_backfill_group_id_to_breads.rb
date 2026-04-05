@@ -1,7 +1,7 @@
 class BackfillGroupIdToBreads < ActiveRecord::Migration[7.1]
   def up
     User.find_each do |user|
-      group = user.groups.first || user.groups.create!(name: "マイパン")
+      group = user.groups.first || user.groups.create!(name: "マイストック")
       user.breads.update_all(group_id: group.id)
     end
   end

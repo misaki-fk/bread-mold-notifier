@@ -23,7 +23,7 @@ class User < ApplicationRecord
   after_create :create_personal_group
 
   def create_personal_group
-    group = Group.create!(name: "マイパン")
+    group = Group.create!(name: "マイストック")
     memberships.create!(group: group)
   end
 end
