@@ -1,7 +1,26 @@
-<h1>招待されています</h1>
+<div class="bg-base-200 min-h-screen flex items-center justify-center px-4">
+  <div class="card bg-base-100 shadow-xl w-full max-w-sm">
 
-<p><%= @group.name %> に参加しますか？</p>
+    <div class="card-body text-center">
 
-<%= button_to "参加する",
-      invite_path(params[:token]),
-      method: :post %>
+      <h2 class="text-lg font-bold mb-2">
+        グループに招待されています
+      </h2>
+
+      <p class="text-xl font-semibold mb-4">
+        <%= @group.name %>
+      </p>
+
+      <p class="text-sm opacity-60 mb-6">
+        このグループに参加しますか？
+      </p>
+
+      <%= button_to "参加する",
+            join_invite_path(@invitation.token),
+            method: :post,
+            class: "btn btn-primary w-full" %>
+
+    </div>
+
+  </div>
+</div>

@@ -1,8 +1,23 @@
-<h1>グループ作成</h1>
+<div class="bg-base-200 min-h-screen pt-10">
+  <div class="max-w-sm mx-auto ">
+    <div class="card bg-base-100 shadow-xl relative">
 
-<%= form_with model: @group do |f| %>
-  <%= f.text_field :name, placeholder: "グループ名" %>
-  <%= f.text_area :description, placeholder: "説明（任意）" %>
+      <!-- 閉じる -->
+      <div class="absolute top-4 right-4">
+        <%= link_to groups_path,
+            class: "w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-500 text-lg" do %>
+          ×
+        <% end %>
+      </div>
 
-  <%= f.submit "作成" %>
-<% end %>
+      <div class="card-body">
+        <h2 class="card-title text-xl mb-4">
+          グループを作成 👥
+        </h2>
+
+        <%= render "form", group: @group %>
+      </div>
+
+    </div>
+  </div>
+</div>

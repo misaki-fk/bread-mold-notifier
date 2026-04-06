@@ -58,6 +58,6 @@ Rails.application.routes.draw do
   end
   
   get  "/invite/:token", to: "invitations#show", as: :invite
-  post "/invite/:token", to: "invitations#create"
+  post "/invite/:token/join", to: "invitations#join", as: :join_invite
 
 end

@@ -6,8 +6,8 @@ class GroupsController < ApplicationController
   end
 
   def show
-    @invitation = Invitation.find_by!(token: params[:token])
-    @group = @invitation.group
+    @group = current_user.groups.find(params[:id])
+    @breads = @group.breads
   end
 
   def new
@@ -15,11 +15,16 @@ class GroupsController < ApplicationController
   end
 
   def create
-    invitation = Invitation.find_by!(token: params[:token])
-    invitation.group.users << current_user
-
-    if invitation.group.save
-      redirect_to invitation.group, notice: "作成しました"
+    @group = Group.new(group_params)
+  
+    if @group.save
+      # 自分をメンバーに追加（超重要🔥）
+      @group.users << current_user
+    
+      # current_groupに設定
+      session[:group_id] = @group.id
+    
+      redirect_to @group, notice: "グループを作成しました！"
     else
       render :new
     end
