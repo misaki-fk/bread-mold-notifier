@@ -1,5 +1,5 @@
-<header class="relative bg-primary text-primary-content h-14">
-  <div class="h-full grid grid-cols-3 items-center px-4">
+<header class="relative z-50 bg-primary text-primary-content h-14">
+  <div class="h-full flex items-center justify-between px-4">
     <!-- 【左】トップに戻るボタン -->
     <div>
       <%= button_to destroy_user_session_path,
@@ -22,8 +22,8 @@
 
   <!-- 【中央】グループ切替ボタン -->
   <% unless current_user.guest? %>
-    <div class="flex justify-center">
-      <div class="relative" data-dropdown>
+    <div class="absolute left-1/2 -translate-x-1/2">
+      <div class="relative z-50" data-dropdown>
         <!-- ボタン -->
         <button onclick="toggleDropdown(this)"
                 class="px-3 py-2 rounded-lg hover:bg-white/10">
@@ -31,7 +31,7 @@
         </button>
                 
         <!-- ドロップダウン -->
-        <div class="hidden absolute mt-2 w-48 bg-white border rounded-lg shadow-lg z-10">
+        <div class="hidden absolute mt-2 w-48 bg-white border rounded-lg shadow-lg z-50">
           <% current_user.groups.each do |group| %>
             <% if group == current_group %>
               <div class="px-4 py-2 text-gray-400">
@@ -57,7 +57,7 @@
   <% end %>
 
     <!-- 【右】アイコン -->
-    <div class="flex justify-end items-center gap-2">
+    <div class="flex items-center gap-2">
 
       <!-- 通知ベル：会員のみ表示 -->
       <% if user_signed_in? && !current_user.guest? %>
