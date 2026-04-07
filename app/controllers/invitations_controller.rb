@@ -32,6 +32,7 @@ class InvitationsController < ApplicationController
     unless invitation.group.users.include?(current_user)
       invitation.group.users << current_user
     end
+    session[:group_id] = invitation.group.id
 
     redirect_to group_path(invitation.group), notice: "グループに参加しました！"
   end
