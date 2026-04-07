@@ -1,4 +1,4 @@
-<header class="relative z-50 bg-primary text-primary-content h-14">
+<header class="relative z-10 bg-primary text-primary-content h-14">
   <div class="h-full flex items-center justify-between px-4">
     <!-- 【左】トップに戻るボタン -->
     <div>
@@ -23,7 +23,7 @@
   <!-- 【中央】グループ切替ボタン -->
   <% unless current_user.guest? %>
     <div class="absolute left-1/2 -translate-x-1/2">
-      <div class="relative z-50" data-dropdown>
+      <div class="relative z-10" data-dropdown>
         <!-- ボタン -->
         <button onclick="toggleDropdown(this)"
                 class="px-3 py-2 rounded-lg hover:bg-white/10">
@@ -31,7 +31,7 @@
         </button>
                 
         <!-- ドロップダウン -->
-        <div class="hidden absolute mt-2 w-48 bg-white border rounded-lg shadow-lg z-50">
+        <div class="hidden absolute mt-2 w-48 bg-white border rounded-lg shadow-lg z-10">
           <% current_user.groups.each do |group| %>
             <% if group == current_group %>
               <div class="px-4 py-2 text-gray-400">
