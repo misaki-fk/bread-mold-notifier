@@ -49,7 +49,7 @@ Rails.application.routes.draw do
   post "/ocr", to: "ocrs#create"
 
   # グループ関連
-  resources :groups, only: [:index, :show, :new, :create] do
+  resources :groups, only: [:index, :show, :new, :create, :destroy] do
     member do
       patch :switch
     end

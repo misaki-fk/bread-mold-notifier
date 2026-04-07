@@ -36,6 +36,19 @@ class GroupsController < ApplicationController
     redirect_to home_path, notice: "グループを切り替えました"
   end
 
+  def destroy
+    group = current_user.groups.find(params[:id])
+    
+    if group.default?
+      redirect_to groups_path, alert: "マイストックは削除できません"
+      return
+    end
+  
+    group.destroy
+  
+    redirect_to groups_path, notice: "削除しました"
+  end
+
   private
 
   def group_params

@@ -34,6 +34,6 @@ class InvitationsController < ApplicationController
     end
     session[:group_id] = invitation.group.id
 
-    redirect_to group_path(invitation.group), notice: "グループに参加しました！"
+    redirect_to home_path, notice: "グループに参加しました！"
   end
 end
