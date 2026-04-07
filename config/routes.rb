@@ -49,10 +49,15 @@ Rails.application.routes.draw do
   post "/ocr", to: "ocrs#create"
 
   # グループ関連
-  resources :groups, only: [] do
+  resources :groups, only: [:index, :show, :new, :create, :destroy] do
     member do
       patch :switch
     end
+  
+    resources :invitations, only: [:create]
   end
+  
+  get  "/invite/:token", to: "invitations#show", as: :invite
+  post "/invite/:token/join", to: "invitations#join", as: :join_invite
 
 end

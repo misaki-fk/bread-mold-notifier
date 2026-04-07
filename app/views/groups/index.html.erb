@@ -1,0 +1,52 @@
+<div class="bg-base-200 min-h-screen pt-6">
+  <div class="max-w-md mx-auto px-4">
+
+    <!-- ヘッダー -->
+    <div class="flex justify-between items-center mb-4">
+      <h1 class="text-lg font-bold">グループ</h1>
+
+      <%= link_to new_group_path,
+          class: "btn btn-primary btn-sm" do %>
+        ＋ 作成
+      <% end %>
+    </div>
+
+    <!-- 一覧 -->
+    <% if @groups.any? %>
+      <div class="space-y-2">
+        <% @groups.each do |group| %>
+          <%= link_to group_path(group),
+                class: "block" do %>
+
+            <div class="bg-base-100 rounded-lg px-4 py-3 shadow-sm hover:bg-base-300 transition flex justify-between items-center">
+
+              <span class="font-medium">
+                <%= group.name %>
+              </span>
+
+              <span class="text-base-content/40">
+                ›
+              </span>
+
+            </div>
+
+          <% end %>
+        <% end %>
+      </div>
+
+    <% else %>
+      <!-- 空状態 -->
+      <div class="text-center mt-10">
+        <p class="text-sm opacity-60 mb-4">
+          グループがまだありません
+        </p>
+
+        <%= link_to new_group_path,
+              class: "btn btn-primary w-full" do %>
+          ＋ グループを作成
+        <% end %>
+      </div>
+    <% end %>
+
+  </div>
+</div>

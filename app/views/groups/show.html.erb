@@ -1,0 +1,54 @@
+<div class="bg-base-200 min-h-screen pt-6">
+  <div class="max-w-md mx-auto px-4">
+
+    <!-- グループ名 -->
+    <div class="card bg-base-100 shadow mb-6">
+      <div class="card-body text-center">
+        <h2 class="text-xl font-bold">
+          <%= @group.name %>
+        </h2>
+      </div>
+    </div>
+
+    <!-- 招待ボタン -->
+    <div class="flex justify-center mb-4">
+      <%= button_to "＋ 招待リンクを作成",
+            group_invitations_path(@group),
+            method: :post,
+            class: "btn btn-primary w-48" %>
+    </div>
+
+    <!-- 招待リンク表示 -->
+    <% if params[:invite_token] %>
+      <div class="card bg-base-100 shadow">
+        <div class="card-body">
+
+          <p class="text-sm mb-2">招待リンク</p>
+
+          <input type="text"
+                 id="invite-link"
+                 value="<%= invite_url(params[:invite_token]) %>"
+                 readonly
+                 class="input input-bordered w-full text-sm" />
+
+          <div class="flex justify-center mb-4">
+            <button onclick="copyInviteLink()"
+                    class="btn btn-sm mt-3 w-48">
+             コピー
+            </button>
+          </div>
+
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+</div>
+
+<script>
+function copyInviteLink() {
+  const input = document.querySelector("#invite-link");
+  navigator.clipboard.writeText(input.value);
+  alert("コピーしました！");
+}
+</script>
