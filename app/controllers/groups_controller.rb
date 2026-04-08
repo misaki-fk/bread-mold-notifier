@@ -44,8 +44,16 @@ class GroupsController < ApplicationController
       return
     end
   
-    @group.destroy
+    if @group.destroy
+      # セッションが削除したグループを指している場合はクリアする
+      if session[:group_id].to_i == @group.id
+        session.delete(:group_id)
+      end
+
       redirect_to groups_path, notice: "グループを削除しました"
+    else
+      redirect_to group_path(@group), alert: "グループの削除に失敗しました"
+    end
   end
 
   private
