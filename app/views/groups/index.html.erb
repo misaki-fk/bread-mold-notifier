@@ -1,9 +1,11 @@
+<%= render "shared/sub_header", title: "グループ共有👥",back_path: settings_path %>
+
 <div class="bg-base-200 min-h-screen pt-6">
   <div class="max-w-md mx-auto px-4">
 
     <!-- ヘッダー -->
     <div class="flex justify-between items-center mb-4">
-      <h1 class="text-lg font-bold">グループ</h1>
+      <h1 class="text-lg font-bold">グループ一覧</h1>
 
       <%= link_to new_group_path,
           class: "btn btn-primary btn-sm" do %>
@@ -42,7 +44,7 @@
         </p>
 
         <%= link_to new_group_path,
-              class: "btn btn-primary w-full" do %>
+              class: "btn btn-primary w-48" do %>
           ＋ グループを作成
         <% end %>
       </div>

@@ -37,16 +37,23 @@ class GroupsController < ApplicationController
   end
 
   def destroy
-    group = current_user.groups.find(params[:id])
+    @group = current_user.groups.find(params[:id])
     
-    if group.default?
-      redirect_to groups_path, alert: "マイストックは削除できません"
+    if @group.default?
+      redirect_to group_path(@group), alert: "このグループは削除できません"
       return
     end
   
-    group.destroy
-  
-    redirect_to groups_path, notice: "削除しました"
+    if @group.destroy
+      # セッションが削除したグループを指している場合はクリアする
+      if session[:group_id].to_i == @group.id
+        session.delete(:group_id)
+      end
+
+      redirect_to groups_path, notice: "グループを削除しました"
+    else
+      redirect_to group_path(@group), alert: "グループの削除に失敗しました"
+    end
   end
 
   private

@@ -23,7 +23,13 @@ class User < ApplicationRecord
   after_create :create_personal_group
 
   def create_personal_group
-    group = Group.create!(name: "マイストック")
-    memberships.create!(group: group)
+    ActiveRecord::Base.transaction do
+      group = Group.create!(
+        name: "マイストック",
+        default: true
+      )
+      memberships.create!(group: group)
+    end
   end
+
 end
