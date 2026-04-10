@@ -89,3 +89,5 @@ group :development, :test do
 end
 
 gem "google-cloud-vision"
+
+gem 'sitemap_generator'

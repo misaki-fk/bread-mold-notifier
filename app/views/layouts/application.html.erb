@@ -13,7 +13,8 @@
       </script>
     <% end %>
 
-    <title>Pankabi</title>
+    <title><%= content_for?(:title) ? yield(:title) : "Pankabi" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "パンの在庫管理アプリ" %>">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
