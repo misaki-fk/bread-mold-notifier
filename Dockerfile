@@ -41,6 +41,8 @@ RUN bundle exec bootsnap precompile app/ lib/
 # assets:precompile
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
+RUN bundle exec rails sitemap:refresh
+
 # ----------------------------
 # Final stage
 # ----------------------------
