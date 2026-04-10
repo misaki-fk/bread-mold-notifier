@@ -357,6 +357,8 @@ GEM
       faraday (>= 0.17.5, < 3.a)
       jwt (>= 1.5, < 4.0)
       multi_json (~> 1.10)
+    sitemap_generator (6.3.0)
+      builder (~> 3.0)
     sprockets (4.2.2)
       concurrent-ruby (~> 1.0)
       logger
@@ -421,6 +423,7 @@ DEPENDENCIES
   resend
   rspec-rails (~> 7.1)
   selenium-webdriver
+  sitemap_generator
   sprockets-rails
   stimulus-rails
   tailwindcss-rails (~> 3.3.2)
