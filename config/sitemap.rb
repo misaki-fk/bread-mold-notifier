@@ -1,4 +1,5 @@
 SitemapGenerator::Sitemap.default_host = "https://pankabi.com"
+SitemapGenerator::Sitemap.compress = false
 
 SitemapGenerator::Sitemap.create do
   add root_path
