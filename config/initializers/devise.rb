@@ -320,4 +320,7 @@ Devise.setup do |config|
   # config.sign_in_after_change_password = true
   # config/initializers/devise.rb
   config.mailer = "DeviseMailer"
+
+  config.omniauth :line, ENV['LINE_CHANNEL_ID'], ENV['LINE_CHANNEL_SECRET']
+
 end

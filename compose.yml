@@ -38,6 +38,8 @@ services:
       TZ: Asia/Tokyo
       DATABASE_URL: postgres://postgres:password@db:5432/myapp_development
       GOOGLE_APPLICATION_CREDENTIALS: /app/config/google-vision.json
+      LINE_CHANNEL_ID: ${LINE_CHANNEL_ID}
+      LINE_CHANNEL_SECRET: ${LINE_CHANNEL_SECRET}
     depends_on:
       db:
         condition: service_healthy
