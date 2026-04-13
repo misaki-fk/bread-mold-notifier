@@ -91,3 +91,6 @@ end
 gem "google-cloud-vision"
 
 gem 'sitemap_generator'
+
+gem "omniauth-line"
+gem "omniauth-rails_csrf_protection"
