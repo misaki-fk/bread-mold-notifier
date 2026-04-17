@@ -56,6 +56,10 @@ Rails.application.routes.draw do
   
     resources :invitations, only: [:create]
   end
+
+  resources :invitations, only: [:show], param: :token do
+    post :join, on: :member
+  end
   
   get  "/invite/:token", to: "invitations#show", as: :invite
   post "/invite/:token/join", to: "invitations#join", as: :join_invite

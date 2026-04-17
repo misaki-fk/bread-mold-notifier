@@ -44,9 +44,8 @@ RSpec.describe "Invitations", type: :request do
     end
 
     it '無効なトークンの場合エラーになる' do
-      expect {
-        get invitation_path("invalidtoken")
-      }.to raise_error(ActiveRecord::RecordNotFound)
+      get invitation_path("invalidtoken")
+      expect(response).to have_http_status(:not_found)
     end
   end
 
@@ -59,7 +58,7 @@ RSpec.describe "Invitations", type: :request do
         expires_at: 3.days.from_now
       )
 
-      post join_invite_path(invitation.token)
+      post join_invitation_path(invitation.token)
 
       expect(group.users).to include(user)
       expect(session[:group_id]).to eq(group.id)
@@ -77,9 +76,7 @@ RSpec.describe "Invitations", type: :request do
       post join_invite_path(invitation.token)
 
       expect(response).to redirect_to(root_path)
-      follow_redirect!
-
-      expect(response.body).to include("期限切れです")
+      expect(flash[:alert]).to eq("期限切れです")
     end
 
     it '既に参加している場合は重複しない' do
