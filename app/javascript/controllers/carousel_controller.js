@@ -23,11 +23,33 @@ export default class extends Controller {
       if (e.key === "ArrowRight") this.next()
     }
     document.addEventListener("keydown", this._handleKeydown)
+
+    // タッチ操作
+    this._touchStartX = 0
+
+    this._handleTouchStart = (e) => {
+      // タッチ開始位置を記録
+      this._touchStartX = e.touches[0].clientX
+  }
+
+  this._handleTouchEnd = (e) => {
+    const diff = this._touchStartX - e.changedTouches[0].clientX
+
+    if (Math.abs(diff) < 50) return // 50px未満の小さい動きは誤操作として無視
+
+    // スワイプ方向に応じて次/前のスライドに移動
+    diff > 0 ? this.next() : this.prev()
+  }
+
+  this.trackTarget.addEventListener("touchstart", this._handleTouchStart, { passive: true })
+  document.addEventListener("touchend", this._handleTouchEnd, { passive: true })
   }
 
   disconnect() {
     clearTimeout(this._animationTimeout)
     document.removeEventListener("keydown", this._handleKeydown)
+    this.trackTarget.removeEventListener("touchstart", this._handleTouchStart)
+    document.removeEventListener("touchend", this._handleTouchEnd)
   }
 
   next() {
