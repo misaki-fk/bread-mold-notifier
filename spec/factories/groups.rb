@@ -1,5 +1,11 @@
 FactoryBot.define do
   factory :group do
-    name { "MyString" }
+    name { "テストグループ" }
+
+    trait :with_user do
+      after(:create) do |group|
+        group.users << create(:user)
+      end
+    end
   end
 end
