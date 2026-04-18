@@ -9,13 +9,25 @@ export default class extends Controller {
     this.total = this.trackTarget.children.length
     this.isAnimating = false
 
-  this.trackTarget.addEventListener("transitionend", (event) => {
-    if (event.target !== this.trackTarget) return
-    this.isAnimating = false
-  })
+    this.trackTarget.addEventListener("transitionend", (event) => {
+      if (event.target !== this.trackTarget) return
+      this._unlockAnimation()
+    })
 
     this.createDots()
     this.update()
+
+    // キーボード操作
+    this._handleKeydown = (e) => {
+      if (e.key === "ArrowLeft")  this.prev()
+      if (e.key === "ArrowRight") this.next()
+    }
+    document.addEventListener("keydown", this._handleKeydown)
+  }
+
+  disconnect() {
+    clearTimeout(this._animationTimeout)
+    document.removeEventListener("keydown", this._handleKeydown)
   }
 
   next() {
@@ -30,14 +42,24 @@ export default class extends Controller {
     if (this.isAnimating) return
     this.isAnimating = true
 
+    // フォールバック：CSSトランジションの時間 + 余裕を持たせる
+    this._animationTimeout = setTimeout(() => this._unlockAnimation(), 400)
+
     this.index = (this.index + direction + this.total) % this.total
     this.update()
+    }
+
+  _unlockAnimation() {
+    this.isAnimating = false
+    clearTimeout(this._animationTimeout)
   }
 
   goTo(index) {
-    if (this.isAnimating) return
+    // 同じ位置をクリックした場合やアニメーション中は無視
+    if (this.isAnimating || index === this.index) return
 
     this.isAnimating = true
+    this._animationTimeout = setTimeout(() => this._unlockAnimation(), 400)
     this.index = index
     this.update()
   }
