@@ -1,10 +1,8 @@
 import { Controller } from "@hotwired/stimulus"
-console.log("carousel connected")
 export default class extends Controller {
   static targets = ["track", "dots"]
 
   connect() {
-    console.log("carousel connected")
     this.index = 0
     this.total = this.trackTarget.children.length
     this.isAnimating = false
@@ -30,19 +28,19 @@ export default class extends Controller {
     this._handleTouchStart = (e) => {
       // タッチ開始位置を記録
       this._touchStartX = e.touches[0].clientX
-  }
+    }
 
-  this._handleTouchEnd = (e) => {
-    const diff = this._touchStartX - e.changedTouches[0].clientX
+    this._handleTouchEnd = (e) => {
+      const diff = this._touchStartX - e.changedTouches[0].clientX
 
-    if (Math.abs(diff) < 50) return // 50px未満の小さい動きは誤操作として無視
+      if (Math.abs(diff) < 50) return // 50px未満の小さい動きは誤操作として無視
 
-    // スワイプ方向に応じて次/前のスライドに移動
-    diff > 0 ? this.next() : this.prev()
-  }
+      // スワイプ方向に応じて次/前のスライドに移動
+      diff > 0 ? this.next() : this.prev()
+    }
 
-  this.trackTarget.addEventListener("touchstart", this._handleTouchStart, { passive: true })
-  document.addEventListener("touchend", this._handleTouchEnd, { passive: true })
+    this.trackTarget.addEventListener("touchstart", this._handleTouchStart, { passive: true })
+    document.addEventListener("touchend", this._handleTouchEnd, { passive: true })
   }
 
   disconnect() {
@@ -52,13 +50,8 @@ export default class extends Controller {
     document.removeEventListener("touchend", this._handleTouchEnd)
   }
 
-  next() {
-    this.move(1)
-  }
-
-  prev() {
-    this.move(-1)
-  }
+  next() {this.move(1)}
+  prev() {this.move(-1)}
 
   move(direction) {
     if (this.isAnimating) return
@@ -87,9 +80,7 @@ export default class extends Controller {
   }
 
   update() {
-    this.trackTarget.style.transform =
-      `translateX(-${this.index * 100}%)`
-
+    this.trackTarget.style.transform = `translateX(-${this.index * 100}%)`
     this.updateDots()
   }
 
