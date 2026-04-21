@@ -13,7 +13,7 @@
           LINEでお知らせを受け取ることができます。
         </p>
 
-        <% if current_user.line_user_id.present? %>
+        <% if current_user&.line_user_id.present? %>
           <!-- 👇 連携済み -->
           
           <p class="text-green-600 mb-4">
