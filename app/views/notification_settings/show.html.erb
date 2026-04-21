@@ -1,14 +1,49 @@
 <%= render "shared/sub_header", title: "通知設定", back_path: home_path %>
+
 <div class="min-h-screen bg-base-200 pt-8">
-  <div class="mt-6 mb-4 max-w-lg mx-auto divide-y divide-base-300 px-4">
+  <div class="mt-6 mb-4 max-w-lg mx-auto px-4">
     <div class="card bg-base-100 shadow-md">
       <div class="card-body text-center">
         <h1 class="text-xl font-bold mb-4">
-          通知設定
+          LINE通知設定
         </h1>
-        <p class="text-gray-500">
-          こちらの機能は現在準備中です。
+
+        <p class="text-gray-600 mb-4">
+          パンの食べ忘れや在庫切れを防ぐために、
+          LINEでお知らせを受け取ることができます。
         </p>
+
+        <% if current_user.line_user_id.present? %>
+          <!-- 👇 連携済み -->
+          
+          <p class="text-green-600 mb-4">
+            LINE連携済みです
+          </p>
+
+          <%= form_with model: current_user, url: user_path(current_user), method: :patch do |f| %>
+            <label class="flex items-center justify-center gap-2 mb-4">
+              <%= f.check_box :line_notify_enabled %>
+              <span>LINE通知を受け取る</span>
+            </label>
+
+            <%= f.submit "保存", class: "btn btn-primary" %>
+          <% end %>
+
+        <% else %>
+          <!-- 👇 未連携 -->
+
+          <p class="text-gray-500 mb-4">
+            LINE通知を利用するには連携が必要です
+          </p>
+
+          <%= button_to "LINEと連携する",
+              user_line_omniauth_authorize_path,
+              method: :post,
+              data: { turbo: false },
+              class: "btn btn-success" %>
+
+        <% end %>
+
       </div>
     </div>
   </div>

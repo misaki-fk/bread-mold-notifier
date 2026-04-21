@@ -40,7 +40,9 @@ Rails.application.routes.draw do
   get "guest/to_signup", to: "guest#to_signup", as: :guest_to_signup
   get "guest/to_login", to: "guest#to_login", as: :guest_to_login
 
-  resource :notification_setting, only: [:show, :edit, :update]
+  resource :notification_setting, only: [:show]
+  # ユーザー更新（ON/OFF用）
+  resources :users, only: [:update]
 
   resources :notifications, only: [:index]
 

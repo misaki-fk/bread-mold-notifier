@@ -321,6 +321,7 @@ Devise.setup do |config|
   # config/initializers/devise.rb
   config.mailer = "DeviseMailer"
 
-  config.omniauth :line, ENV['LINE_CHANNEL_ID'], ENV['LINE_CHANNEL_SECRET']
+  config.omniauth :line, ENV['LINE_CHANNEL_ID'], ENV['LINE_CHANNEL_SECRET'],
+                  scope: 'profile openid email'
 
 end
