@@ -8,7 +8,7 @@ class LineClient
     http.use_ssl = true
 
     req = Net::HTTP::Post.new(uri.request_uri)
-    req["Authorization"] = "Bearer #{Rails.application.credentials.line[:channel_token]}"
+    req["Authorization"] = "Bearer #{ENV["LINE_CHANNEL_TOKEN"]}"
     req["Content-Type"] = "application/json"
 
     req.body = {
