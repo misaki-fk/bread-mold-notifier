@@ -1,6 +1,4 @@
 class Notification < ApplicationRecord
-  after_create :send_line_notification
-
   belongs_to :user
   belongs_to :bread
 
