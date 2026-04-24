@@ -9,9 +9,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if user_signed_in?
       # 連携
-      current_user.update!(line_user_id: auth.uid)
+      current_user.update!(
+        line_user_id: auth.uid,
+        line_notify_enabled: true
+      )
 
-      redirect_to notification_settings_path, notice: "LINE連携しました！"
+      redirect_to notification_settings_path, notice: "LINE連携しました！通知をONにしました"
       return
 
     else

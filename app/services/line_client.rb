@@ -17,7 +17,10 @@ class LineClient
         { type: "text", text: message }
       ]
     }.to_json
+    
+    response = http.request(req)
 
-    http.request(req)
+    Rails.logger.info "LINE response code: #{response.code}"
+    Rails.logger.info "LINE response body: #{response.body}"
   end
 end
