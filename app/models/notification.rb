@@ -14,6 +14,9 @@ class Notification < ApplicationRecord
     private
 
   def send_line_notification
+    Rails.logger.info "LINE送信開始"
+    Rails.logger.info "user_id: #{user.line_user_id}"
+    Rails.logger.info "token: #{ENV["LINE_CHANNEL_TOKEN"].present?}"
     return unless user.line_user_id.present?
     return unless user.line_notify_enabled?
 
