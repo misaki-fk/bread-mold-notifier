@@ -1,7 +1,7 @@
 namespace :notification do
   desc "通知作成"
   task create: :environment do
-    Bread.where(notify_enabled: true)
+    Bread.where(users: { notify_enabled: true })
          .where("remaining_count > 0")
          .where("expiration_date >= ?", Date.today)
          .find_each do |bread|
