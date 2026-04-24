@@ -4,6 +4,7 @@ namespace :notification do
     Rails.logger.info "Cron START"
 
     Bread.find_each do |bread|
+      user = bread.user
       Rails.logger.info "bread_id: #{bread.id}"
 
       Rails.logger.info "line_user_id: #{user.line_user_id}"
