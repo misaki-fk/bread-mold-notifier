@@ -4,7 +4,7 @@ namespace :notification do
     Bread.joins(:user)
          .where(users: { line_notify_enabled: true })
          .where("remaining_count > 0")
-         .where("expiration_date >= ?", Date.today)
+         .where("expiration_date >= ?", Time.zone.today)
          .find_each do |bread|
       bread.notify_if_needed
     end
