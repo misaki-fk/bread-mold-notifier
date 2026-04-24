@@ -3,10 +3,6 @@ namespace :notification do
   task check: :environment do
     Rails.logger.info "Cron START"
 
-    Bread.find_each do |bread|
-      bread.send(:notify_if_needed)
-    end
-
     Notification.where(line_sent: false).find_each do |notification|
       user = notification.user
 
