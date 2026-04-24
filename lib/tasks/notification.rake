@@ -2,18 +2,16 @@ namespace :notification do
   desc "通知チェック"
   task check: :environment do
     Rails.logger.info "Cron START"
-    Notification.destroy_all  # ← 一時的に追加
 
-    Bread.find_each do |bread|
-      user = bread.user
-      Rails.logger.info "bread_id: #{bread.id}"
+    Notification.where(line_sent: false).find_each do |notification|
+      user = notification.user
 
-      Rails.logger.info "line_user_id: #{user.line_user_id}"
-      Rails.logger.info "notify_enabled: #{user.line_notify_enabled}"
-      Rails.logger.info "expiration: #{bread.expiration_date}"
-      Rails.logger.info "remaining: #{bread.remaining_count}"
-      
-      bread.send(:notify_if_needed)
+      next unless user.line_user_id.present?
+      next unless user.line_notify_enabled?
+
+      LineClient.push_message(user, notification.message)
+
+      notification.update!(line_sent: true)
     end
   end
 end

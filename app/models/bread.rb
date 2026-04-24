@@ -74,12 +74,12 @@ class Bread < ApplicationRecord
   end
 
   def create_notification(type, message)
-  return if Notification.exists?(
-    user: user,
-    bread: self,
-    notification_type: type,
-    created_at: Time.zone.today.all_day
-  )
+    # 同じ通知が5分以内に作成されていたらスキップ
+    return if Notification.exists?(
+      bread: self,
+      notification_type: type,
+      created_at: 5.minutes.ago..Time.zone.now
+    )
 
   Notification.create!(
     user: user,
