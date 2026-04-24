@@ -61,8 +61,8 @@ class OcrService
     return nil if parsed_dates.empty?
   
     # 念のため未来優先
-    future_dates = parsed_dates.select { |d| d >= Date.today }
-  
+    future_dates = parsed_dates.select { |d| d >= Time.zone.today }
+
     return future_dates.min if future_dates.any?
   
     parsed_dates.min

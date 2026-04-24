@@ -12,7 +12,7 @@ RSpec.describe "パン登録", type: :request do
         bread_type_id: bread_type.id,
         total_count: 6,
         daily_consumption: 2,
-        expiration_date: Date.today + 3
+        expiration_date: Time.zone.today + 3
       }
     }
 

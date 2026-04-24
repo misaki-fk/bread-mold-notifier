@@ -14,12 +14,12 @@ class Bread < ApplicationRecord
   def days_until_expiration
     return nil unless expiration_date
 
-    (expiration_date - Date.today).to_i
+    (expiration_date - Time.zone.today).to_i
   end
 
   # 残り枚数
   def remaining_count
-    days_passed = (Date.current - created_at.to_date).to_i
+    days_passed = (Time.zone.today - created_at.in_time_zone.to_date).to_i
     consumed = daily_consumption * days_passed
     remaining = total_count - consumed + adjustment_count
   end
