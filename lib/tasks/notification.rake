@@ -2,6 +2,7 @@ namespace :notification do
   desc "通知チェック"
   task check: :environment do
     Rails.logger.info "Cron START"
+    Notification.destroy_all  # ← 一時的に追加
 
     Bread.find_each do |bread|
       user = bread.user
