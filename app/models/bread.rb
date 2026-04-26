@@ -59,38 +59,19 @@ class Bread < ApplicationRecord
 
   def notify_if_needed
     if expiration_date == Time.zone.today
-      message = build_message("expiration_today")
-      create_notification("expiration_today", message)
+      create_notification("expiration_today")
     end
 
     if daily_consumption > 0
       tomorrow_remaining = remaining_count - daily_consumption
 
       if tomorrow_remaining <= 0 && remaining_count > 0
-        message = build_message("run_out_tomorrow")
-        create_notification("run_out_tomorrow", message)
+        create_notification("run_out_tomorrow")
       end
     end
   end
 
-  # メッセージ
-  def build_message(type)
-    greeting = greeting_message
-
-    case type
-    when "expiration_today"
-      "#{greeting}\n\n📢 パンの消費期限が今日までです！\nお早めにご確認ください 👀"
-    when "run_out_tomorrow"
-      "#{greeting}\n\n📦 明日パンの在庫がなくなります！\n補充をお忘れなく 🛒"
-    end
-  end
-
-  # あいさつメッセージ
-  def greeting_message
-    "おはようございます ☀️"
-  end
-
-  def create_notification(type, message)
+  def create_notification(type)
     # 同じ通知が5分以内に作成されていたらスキップ
     return if Notification.exists?(
       bread: self,
@@ -102,7 +83,6 @@ class Bread < ApplicationRecord
     user: user,
     bread: self,
     notification_type: type,
-    message: message,
     notified_at: Time.zone.now
   )
   end
