@@ -11,17 +11,29 @@
         </p>
       <% end %>
 
-        <% @notifications.each do |notification| %>
-          <div style="border-bottom: 1px solid #ccc; padding: 10px;">
-
+      <% @notifications.each do |notification| %>
+        <% if notification.system? %>
+          <!-- システムお知らせ -->
+          <div style="padding: 12px;">
+            <p style="font-weight: bold;">【お知らせ】</p>
+            <p style="white-space: pre-line;">
+              <%= notification.display_message %>
+            </p>
+          </div>
+          <hr>
+        <% else %>
+          <!-- 通常通知 -->
+          <div style="border-bottom: 1px solid #ccc; padding: 10px; text-align: left;">
             <p style="font-weight: <%= notification.is_read ? 'normal' : 'bold' %>;">
-              <%= notification.message %>
+              <%= notification.display_message %>
             </p>
         
-            <small><%= notification.created_at.strftime("%Y-%m-%d %H:%M") %></small>
-          </div>
+            <small>
+              <%= l notification.created_at, format: :short %>
+            </small>
+          </div>    
         <% end %>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>

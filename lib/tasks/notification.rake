@@ -9,20 +9,24 @@ namespace :notification do
       bread.notify_if_needed
     end
   end
-end
 
-namespace :notification do
   desc "通知送信"
   task send: :environment do
-    Notification.where(line_sent: false).find_each do |notification|
+    Notification.where(line_sent: false)
+                .where("created_at >= ?", Time.zone.today)
+                .find_each do |notification|
+
       user = notification.user
 
       next unless user.line_user_id.present?
       next unless user.line_notify_enabled?
 
-      LineClient.push_message(user, notification.message)
-
-      notification.update!(line_sent: true)
+      begin
+        LineClient.push_message(user, notification.line_message)
+        notification.update!(line_sent: true)
+      rescue => e
+        Rails.logger.error "[LINE送信失敗] #{e.message}"
+      end
     end
   end
 end

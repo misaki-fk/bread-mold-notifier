@@ -6,8 +6,33 @@ class Notification < ApplicationRecord
     # 期限切れ当日通知
     expiration_today: "expiration_today",
     # 明日在庫切れ通知
-    run_out_tomorrow: "run_out_tomorrow"
+    run_out_tomorrow: "run_out_tomorrow",
+    system: "system",
+    # お知らせ用
+    new_feature: "new_feature"
   }
+
+  def display_message
+    case notification_type
+    when "expiration_today"
+      "パンの消費期限が今日までです"
+    when "run_out_tomorrow"
+      "明日在庫がなくなります"
+    when "system"
+      message
+    end
+  end
+
+  def line_message
+    greeting = "おはようございます ☀️"
+
+    case notification_type
+    when "expiration_today"
+      "#{greeting}\n\n📢 #{display_message}\nお早めにご確認ください 👀"
+    when "run_out_tomorrow"
+      "#{greeting}\n\n📦 #{display_message}\n補充をお忘れなく 🛒"
+    end
+  end
 
     private
 
@@ -18,6 +43,6 @@ class Notification < ApplicationRecord
     return unless user.line_user_id.present?
     return unless user.line_notify_enabled?
 
-    LineClient.push_message(user, message)
+    LineClient.push_message(user, line_message)
   end
 end
