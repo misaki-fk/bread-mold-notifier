@@ -9,7 +9,6 @@ namespace :notification do
       bread.notify_if_needed
     end
   end
-end
 
   desc "通知送信"
   task send: :environment do
