@@ -7,7 +7,9 @@ class Notification < ApplicationRecord
     expiration_today: "expiration_today",
     # 明日在庫切れ通知
     run_out_tomorrow: "run_out_tomorrow",
-    system: "system"
+    system: "system",
+    # お知らせ用
+    new_feature: "new_feature"
   }
 
   def display_message

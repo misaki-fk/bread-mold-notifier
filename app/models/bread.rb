@@ -79,11 +79,11 @@ class Bread < ApplicationRecord
       created_at: 5.minutes.ago..Time.zone.now
     )
 
-  Notification.create!(
-    user: user,
-    bread: self,
-    notification_type: type,
-    notified_at: Time.zone.now
-  )
+    Notification.create!(
+      user: user,
+      bread: self,
+      notification_type: type,
+      notified_at: Time.zone.now
+    )
   end
 end
