@@ -1,6 +1,6 @@
 class Notification < ApplicationRecord
   belongs_to :user
-  belongs_to :bread
+  belongs_to :bread, optional: true
 
   enum notification_type: {
     # 期限切れ当日通知
