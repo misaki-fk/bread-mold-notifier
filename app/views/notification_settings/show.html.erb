@@ -4,20 +4,25 @@
   <div class="mt-6 mb-4 max-w-lg mx-auto px-4">
     <div class="card bg-base-100 shadow-md">
       <div class="card-body text-center">
-        <h1 class="text-xl font-bold mb-4">
-          LINE通知設定
-        </h1>
-
-        <p class="text-gray-600 mb-4">
-          パンの食べ忘れや在庫切れを防ぐために、
-          LINEでお知らせを受け取ることができます。
+        <p class="text-gray-600 my-4">
+          パンの期限切れや在庫切れが近づくと、<br>
+          朝8時にLINEで通知が届きます<br>
+          （該当するパンがある場合のみ）。
         </p>
+
+        <div class="mb-6">
+          <p class="text-sm text-gray-500 mb-2">実際に届く通知のイメージ</p>
+          <%= image_tag "line_notification_sample.png", class: "w-64 mx-auto rounded shadow" %>
+        </div>
 
         <% if current_user&.line_user_id.present? %>
           <!-- 👇 連携済み -->
           
           <p class="text-green-600 mb-4">
             LINE連携済みです
+          </p>
+          <p class="text-sm text-gray-500 mb-4">
+            LINE通知のON/OFFを切り替えることができます
           </p>
 
           <%= form_with model: current_user, url: user_path(current_user), method: :patch do |f| %>
@@ -33,7 +38,8 @@
           <!-- 👇 未連携 -->
 
           <p class="text-gray-500 mb-4">
-            LINE通知を利用するには連携が必要です
+            LINE通知を利用するには<br>
+            LINEアカウントと連携し、友達追加が必要です
           </p>
 
           <%= button_to "LINEと連携する",
