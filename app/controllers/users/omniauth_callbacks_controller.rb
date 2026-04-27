@@ -8,6 +8,15 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
 
     if user_signed_in?
+      # 連携済み
+      existing_user = User.find_by(line_user_id: auth.uid)
+      
+      if existing_user && existing_user != current_user
+        redirect_to notification_settings_path,
+        alert: "このLINEアカウントは既に他のアカウントと連携されています。LINEログインをお試しください。"
+        return
+      end
+
       # 連携
       current_user.update!(
         line_user_id: auth.uid,
@@ -18,19 +27,26 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       return
 
     else
+      # 連携済みユーザーを探す
+      user = User.find_by(line_user_id: auth.uid)
+      # provider + uid で探す
+      user ||= User.find_by(provider: auth.provider, uid: auth.uid)
       # LINEログイン
-      @user = User.find_or_create_by!(provider: auth.provider, uid: auth.uid) do |u|
-        u.name ||= auth.info.name
-        u.email = auth.info.email || "#{auth.uid}@example.com"
-        u.password = Devise.friendly_token[0, 20]
-      end
-
-      @user.update!(line_user_id: auth.uid)
-
-      if @user.persisted?
-        sign_in_and_redirect @user, notice: "LINEでログインしました！"
+      if user
+        # 既存ユーザーでログイン
+        sign_in_and_redirect user, notice: "LINEでログインしました！"
       else
-        redirect_to root_path, alert: "LINEログインに失敗しました"
+        # 新規登録
+        user = User.create!(
+          provider: auth.provider,
+          uid: auth.uid,
+          name: auth.info.name,
+          email: auth.info.email || "#{auth.uid}@example.com",
+          password: Devise.friendly_token[0, 20],
+          line_user_id: auth.uid
+        )
+
+        sign_in_and_redirect user, notice: "LINEで新規登録しました！"
       end
     end
 

@@ -13,7 +13,15 @@ RSpec.describe 'アクセス制御', type: :request do
 
 
   context 'ログイン後' do
-    before { sign_in user }
+    before do
+      user
+      post user_session_path, params: {
+        user: {
+          email: user.email,
+          password: "password123"
+        }
+      }
+    end
 
     it 'ホーム画面にアクセスできる' do
       get home_path
