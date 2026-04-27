@@ -21,8 +21,23 @@
           <p class="text-green-600 mb-4">
             LINE連携済みです
           </p>
+
+          <p class="text-sm text-gray-500 mb-2">
+            通知を受け取るには友だち追加が必要です<br>
+            まずはLINEで友だち追加をしてください
+          </p>
+          
+          <a href="https://lin.ee/rrzcxqV"
+             target="_blank"
+             rel="noopener"
+             class="inline-block mb-4">
+            <%= image_tag "https://scdn.line-apps.com/n/line_add_friends/btn/ja.png",
+                alt: "LINEで友だち追加",
+                class: "mx-auto w-40" %>
+          </a>
+
           <p class="text-sm text-gray-500 mb-4">
-            LINE通知のON/OFFを切り替えることができます
+            LINE通知はON/OFFを切り替えることができます
           </p>
 
           <%= form_with model: current_user, url: user_path(current_user), method: :patch do |f| %>
@@ -37,19 +52,29 @@
         <% else %>
           <!-- 👇 未連携 -->
 
-          <p class="text-gray-500 mb-4">
-            LINE通知を利用するには<br>
-            LINEアカウントと連携し、友達追加が必要です
-          </p>
+        <p class="text-gray-500 mb-2">
+          LINE通知を利用するには
+        </p>
 
-          <%= button_to "LINEと連携する",
+        <div class="mb-4">
+          <p class="text-gray-500 mb-2">
+            ①LINEで友だち追加
+          </p>
+          <a href="https://lin.ee/rrzcxqV"
+             target="_blank"
+             rel="noopener"
+             class="inline-block mb-4">
+            <%= image_tag "https://scdn.line-apps.com/n/line_add_friends/btn/ja.png",
+                alt: "LINEで友だち追加",
+                class: "mx-auto w-40" %>
+          </a>
+          <%= button_to "② LINEと連携する",
               user_line_omniauth_authorize_path,
               method: :post,
               data: { turbo: false },
-              class: "btn btn-success" %>
-
+              class: "btn btn-success w-full" %>
+        </div>
         <% end %>
-
       </div>
     </div>
   </div>
