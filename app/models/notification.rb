@@ -28,9 +28,9 @@ class Notification < ApplicationRecord
 
     case notification_type
     when "expiration_today"
-      "#{greeting}\n\n📢 #{display_message}\nお早めにご確認ください 👀"
+      "#{greeting}\n\n #{display_message}\nお早めにご確認ください 👀"
     when "run_out_tomorrow"
-      "#{greeting}\n\n📦 #{display_message}\n補充をお忘れなく 🛒"
+      "#{greeting}\n\n #{display_message}\n補充をお忘れなく 🛒"
     end
   end
 
