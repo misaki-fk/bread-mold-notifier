@@ -55,4 +55,3 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     redirect_to root_path, alert: "LINEログインに失敗しました"
   end
 end
-end
