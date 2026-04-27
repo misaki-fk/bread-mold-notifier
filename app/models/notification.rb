@@ -34,7 +34,7 @@ class Notification < ApplicationRecord
 
   # LINE通知機能追加のお知らせ
   def self.line_promo_message
-    "LINE通知機能が追加されました！\n設定一覧からLINE通知を受け取る設定ができます。"
+    "LINE通知機能が追加されました！<br>設定一覧からLINE通知を受け取る設定ができます。"
   end
 
     private
