@@ -14,6 +14,7 @@ class Users::SessionsController < Devise::SessionsController
           user: resource,
           notification_type: "system",
           message: Notification.line_promo_message
+          notified_at: Time.zone.now
         )
       end
     end
