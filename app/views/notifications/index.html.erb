@@ -16,8 +16,8 @@
           <!-- システムお知らせ -->
           <div style="padding: 12px;">
             <p style="font-weight: bold;">【お知らせ】</p>
-            <p style="white-space: pre-line;">
-              <%= notification.display_message %>
+            <p>
+              <%= simple_format(notification.display_message) %>
             </p>
           </div>
           <hr>

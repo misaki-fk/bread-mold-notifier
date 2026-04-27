@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
  
   # 通常ログイン
-  devise_for :users, controllers: { sessions: 'users/sessions', omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, controllers: { sessions: 'users/sessions', omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'users/registrations' }
 
   root "top#index"
   get "/home", to: "home#index"
@@ -66,6 +66,5 @@ Rails.application.routes.draw do
   get  "/invite/:token", to: "invitations#show", as: :invite
   post "/invite/:token/join", to: "invitations#join", as: :join_invite
 
-  
 
 end
