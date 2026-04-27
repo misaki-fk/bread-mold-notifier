@@ -66,6 +66,8 @@ Rails.application.routes.draw do
   get  "/invite/:token", to: "invitations#show", as: :invite
   post "/invite/:token/join", to: "invitations#join", as: :join_invite
 
-  
+  devise_for :users, controllers: {
+    registrations: "users/registrations"
+  }
 
 end
