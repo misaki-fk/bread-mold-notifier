@@ -5,7 +5,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         Notification.create!(
           user: user,
           notification_type: "system",
-          message: Notification.line_promo_message
+          message: Notification.line_promo_message,
           notified_at: Time.zone.now
         )
       end
