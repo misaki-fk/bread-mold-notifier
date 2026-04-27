@@ -8,8 +8,6 @@ class Notification < ApplicationRecord
     # 明日在庫切れ通知
     run_out_tomorrow: "run_out_tomorrow",
     system: "system",
-    # お知らせ用
-    new_feature: "new_feature"
   }
 
   def display_message
@@ -32,6 +30,11 @@ class Notification < ApplicationRecord
     when "run_out_tomorrow"
       "#{greeting}\n\n #{display_message}\n補充をお忘れなく 🛒"
     end
+  end
+
+  # LINE通知機能追加のお知らせ
+  def self.line_promo_message
+    "LINE通知機能が追加されました！\n設定一覧からLINE通知を受け取る設定ができます。"
   end
 
     private

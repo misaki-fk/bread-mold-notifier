@@ -8,6 +8,14 @@ class Users::SessionsController < Devise::SessionsController
     
     super do |resource|
       resource.remember_me = true
+
+      if resource.persisted? && resource.line_user_id.blank? && !Notification.exists?(user: resource, notification_type: "system")
+        Notification.create!(
+          user: resource,
+          notification_type: "system",
+          message: Notification.line_promo_message
+        )
+      end
     end
   end
   # GET /users/sign_in
