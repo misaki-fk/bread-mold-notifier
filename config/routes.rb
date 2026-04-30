@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'pages/contact'
   get 'notifications/index'
   get 'notification_settings/show'
   get 'notification_settings/edit'
@@ -66,5 +67,7 @@ Rails.application.routes.draw do
   get  "/invite/:token", to: "invitations#show", as: :invite
   post "/invite/:token/join", to: "invitations#join", as: :join_invite
 
+  # お問合せ
+  get 'contact', to: 'pages#contact'
 
 end
