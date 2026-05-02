@@ -18,7 +18,7 @@ namespace :notification do
 
       user = notification.user
 
-      next unless user.line_user_id.present?
+      next if user.line_user_id.blank?
       next unless user.line_notify_enabled?
 
       begin
