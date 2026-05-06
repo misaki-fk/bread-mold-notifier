@@ -22,21 +22,28 @@
         </div>
         
       </div>
-        
+      
+       <!-- 矢印（スマホ非表示） -->
       <button data-action="click->carousel#prev"
-              class="absolute left-5 top-1/2 -translate-y-1/2 btn btn-circle">
+              class="absolute left-5 top-1/2 -translate-y-1/2 btn btn-circle hidden sm:flex">
         ❮
       </button>
               
       <button data-action="click->carousel#next"
-              class="absolute right-5 top-1/2 -translate-y-1/2 btn btn-circle">
+              class="absolute right-5 top-1/2 -translate-y-1/2 btn btn-circle hidden sm:flex">
         ❯
       </button>
               
-          <!-- ドットエリア追加 -->
+          <!-- ドットエリア -->
       <div class="flex justify-center mt-4 space-x-2"
            data-carousel-target="dots">
       </div>
+
+      <!-- スワイプヒント（スマホのみ） -->
+      <div class="sm:hidden text-center text-xs text-gray-400 mt-2">
+        ← スワイプで確認できます →
+      </div>
+      
     </div>
   </div>
 </div>
