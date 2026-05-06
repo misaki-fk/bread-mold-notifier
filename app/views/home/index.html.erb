@@ -40,10 +40,11 @@
       </div>
 
       <!-- スワイプヒント（スマホのみ） -->
-      <div class="sm:hidden text-center text-xs text-gray-400 mt-2">
-        ← スワイプで確認できます →
-      </div>
-      
+      <% if @breads.any? %>
+        <div class="sm:hidden text-center text-xs text-gray-400 mt-2">
+          ← スワイプで確認できます →
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
