@@ -3,9 +3,9 @@ namespace :notification do
   task create: :environment do
     Bread.joins(:user)
          .where(users: { line_notify_enabled: true })
-         .where("remaining_count > 0")
          .where("expiration_date >= ?", Time.zone.today)
          .find_each do |bread|
+      next unless bread.remaining_count > 0
       bread.notify_if_needed
     end
   end
