@@ -89,6 +89,8 @@ group :development, :test do
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
+  gem "brakeman", require: false
+  gem "bundler-audit", require: false
 end
 
 gem "google-cloud-vision"
