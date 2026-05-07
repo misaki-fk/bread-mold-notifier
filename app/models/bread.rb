@@ -50,13 +50,6 @@ class Bread < ApplicationRecord
 
   after_commit :notify_if_needed, on: [:create, :update]
 
-
-  private
-
-  def set_remaining_count
-    self.remaining_count = total_count
-  end
-
   def notify_if_needed
     if expiration_date == Time.zone.today
       create_notification("expiration_today")
@@ -69,6 +62,12 @@ class Bread < ApplicationRecord
         create_notification("run_out_tomorrow")
       end
     end
+  end
+
+  private
+
+  def set_remaining_count
+    self.remaining_count = total_count
   end
 
   def create_notification(type)
