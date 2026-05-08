@@ -13,7 +13,7 @@ namespace :notification do
   desc "通知送信"
   task send: :environment do
     Notification.where(line_sent: false)
-                .where("created_at >= ?", Time.zone.today)
+                .where("created_at >= ?", Time.zone.now.beginning_of_day)
                 .find_each do |notification|
 
       user = notification.user
