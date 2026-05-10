@@ -38,3 +38,7 @@
 !/app/assets/builds/.keep
 
 config/google-vision.json
+
+.DS_Store
+**/.DS_Store
+node_modules/
