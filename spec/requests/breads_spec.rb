@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe "パン登録", type: :request do
   let(:user) { create(:user) }
   let!(:bread_type) { create(:bread_type) }
