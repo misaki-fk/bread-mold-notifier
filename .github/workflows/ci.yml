@@ -44,6 +44,10 @@ jobs:
         with:
           node-version: 20
 
+      # 追加
+      - name: Install Node dependencies
+        run: npm ci
+
       # ④ DB準備
       - run: bin/rails db:prepare
 
