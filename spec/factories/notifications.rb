@@ -1,10 +1,18 @@
 FactoryBot.define do
   factory :notification do
-    user { nil }
-    bread { nil }
-    notification_type { "MyString" }
-    message { "MyString" }
-    is_read { false }
-    notified_at { "2026-03-19 13:51:06" }
+    user
+    bread
+    notification_type { "expiration_today" }
+    notified_at { Time.current }
+
+    trait :run_out_tomorrow do
+      notification_type { "run_out_tomorrow" }
+    end
+
+    trait :system do
+      bread { nil }
+      notification_type { "system" }
+      message { "システムからのお知らせです" }
+    end
   end
 end

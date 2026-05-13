@@ -2,6 +2,7 @@ class Bread < ApplicationRecord
   has_many :notifications, dependent: :destroy
   belongs_to :user, optional: true
   belongs_to :bread_type
+  belongs_to :group
   validates :expiration_date, presence: true
   validates :total_count, presence: true
   validates :daily_consumption, presence: true,
