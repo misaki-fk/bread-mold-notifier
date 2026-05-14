@@ -36,4 +36,62 @@ RSpec.describe Notification, type: :model do
       }.to raise_error(ArgumentError)
     end
   end
+
+  describe '#display_message' do
+    context 'expiration_today のとき' do
+      it '期限切れメッセージを返す' do
+        notification = build(:notification, notification_type: 'expiration_today')
+        expect(notification.display_message).to eq('パンの消費期限が今日までです')
+      end
+    end
+
+    context 'run_out_tomorrow のとき' do
+      it '在庫切れメッセージを返す' do
+        notification = build(:notification, notification_type: 'run_out_tomorrow')
+        expect(notification.display_message).to eq('パンの在庫が明日なくなります')
+      end
+    end
+
+    context 'system のとき' do
+      it 'message属性をそのまま返す' do
+        notification = build(
+          :notification,
+          notification_type: 'system',
+          bread: nil,
+          message: 'システムからのお知らせです'
+        )
+        expect(notification.display_message).to eq('システムからのお知らせです')
+      end
+    end
+  end
+
+  describe '#line_message' do
+    context 'expiration_today のとき' do
+      it '挨拶と display_message が含まれる' do
+        notification = build(:notification, notification_type: 'expiration_today')
+        expect(notification.line_message).to include('おはようございます')
+        expect(notification.line_message).to include(notification.display_message)
+      end
+    end
+
+    context 'run_out_tomorrow のとき' do
+      it '挨拶と display_message が含まれる' do
+        notification = build(:notification, notification_type: 'run_out_tomorrow')
+        expect(notification.line_message).to include('おはようございます')
+        expect(notification.line_message).to include(notification.display_message)
+      end
+    end
+
+    context 'system のとき' do
+      it 'nil を返す' do
+        notification = build(
+          :notification,
+          notification_type: 'system',
+          bread: nil,
+          message: 'システム通知'
+        )
+        expect(notification.line_message).to be_nil
+      end
+    end
+  end
 end
