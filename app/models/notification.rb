@@ -15,7 +15,7 @@ class Notification < ApplicationRecord
     when "expiration_today"
       "パンの消費期限が今日までです"
     when "run_out_tomorrow"
-      "明日在庫がなくなります"
+      "パンの在庫が明日なくなります"
     when "system"
       message
     end
