@@ -123,4 +123,62 @@ RSpec.describe Bread, type: :model do
       end
     end
   end
+
+    describe '#increase_adjustment!' do
+    it 'adjustment_count を +1 する' do
+      bread = create(:bread, adjustment_count: 0)
+      bread.increase_adjustment!
+      expect(bread.adjustment_count).to eq(1)
+    end
+  end
+
+  describe '#decrease_adjustment!' do
+    it 'adjustment_count を -1 する' do
+      bread = create(:bread, adjustment_count: 0)
+      bread.decrease_adjustment!
+      expect(bread.adjustment_count).to eq(-1)
+    end
+  end
+
+  describe '#status_message' do
+    context 'remaining_count が 0 のとき' do
+      it '完食メッセージを返す' do
+        bread = build(:bread, total_count: 0, daily_consumption: 1)
+        bread.created_at = Time.current
+        expect(bread.status_message).to eq("完食しました🎉")
+      end
+    end
+
+    context '期限切れのとき' do
+      it '危険メッセージを返す' do
+        bread = build(:bread, total_count: 10, daily_consumption: 1, expiration_date: 1.day.ago)
+        bread.created_at = Time.current
+        expect(bread.status_message).to eq("危険です（自己責任）❗️")
+      end
+    end
+
+    context '期限が今日のとき' do
+      it '今日までメッセージを返す' do
+        bread = build(:bread, expiration_date: Time.zone.today)
+        bread.created_at = Time.current
+        expect(bread.status_message).to eq("期限が今日までです⚠️")
+      end
+    end
+
+    context '期限が明日のとき' do
+      it '明日が消費期限メッセージを返す' do
+        bread = build(:bread, expiration_date: Time.zone.today + 1)
+        bread.created_at = Time.current
+        expect(bread.status_message).to eq("明日が消費期限です")
+      end
+    end
+
+    context '期限まで余裕があるとき' do
+      it 'まだ大丈夫メッセージを返す' do
+        bread = build(:bread, expiration_date: Time.zone.today + 5)
+        bread.created_at = Time.current
+        expect(bread.status_message).to eq("まだ大丈夫です👍")
+      end
+    end
+  end
 end
