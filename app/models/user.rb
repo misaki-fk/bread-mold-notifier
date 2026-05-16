@@ -32,5 +32,4 @@ class User < ApplicationRecord
       memberships.create!(group: group)
     end
   end
-
 end

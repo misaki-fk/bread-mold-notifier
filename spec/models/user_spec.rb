@@ -31,4 +31,20 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe '.create_guest' do
+    let(:user) { User.create_guest }
+
+    it 'ゲストユーザーを作成してDBに保存する' do
+      expect(user).to be_persisted
+    end
+
+    it 'guest 属性が true である' do
+      expect(user.guest).to be true
+    end
+
+    it 'email が guest_ で始まる' do
+      expect(user.email).to start_with('guest_')
+    end
+  end
 end
