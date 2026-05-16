@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :bread do
-    user
+    user { create(:user) }
     bread_type
     group { user.groups.first }
     total_count { 6 }
