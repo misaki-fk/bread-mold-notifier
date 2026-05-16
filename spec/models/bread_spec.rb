@@ -92,4 +92,35 @@ RSpec.describe Bread, type: :model do
       end
     end
   end
+
+  describe '#remaining_count' do
+    context '作成当日のとき' do
+      it 'total_count をそのまま返す' do
+        bread = build(:bread, total_count: 6, daily_consumption: 1)
+        bread.created_at = Time.current
+        expect(bread.remaining_count).to eq(6)
+      end
+    end
+
+    context '作成から3日経過したとき' do
+      it 'total_count から3日分の消費を引いた値を返す' do
+        bread = build(:bread, total_count: 10, daily_consumption: 2)
+        bread.created_at = 3.days.ago
+        expect(bread.remaining_count).to eq(4)   # 10 - (2 × 3) + 0 = 4
+      end
+    end
+
+    context 'adjustment_count があるとき' do
+      it '計算結果に adjustment_count が加算される' do
+        bread = build(
+          :bread,
+          total_count: 6,
+          daily_consumption: 1,
+          adjustment_count: 2
+        )
+        bread.created_at = 2.days.ago
+        expect(bread.remaining_count).to eq(6)   # 6 - 2 + 2 = 6
+      end
+    end
+  end
 end
