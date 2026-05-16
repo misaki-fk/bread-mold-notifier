@@ -47,4 +47,28 @@ RSpec.describe User, type: :model do
       expect(user.email).to start_with('guest_')
     end
   end
+
+  describe 'after_create :create_personal_group' do
+    context 'User作成時' do
+      it 'Group が1つ作られる' do
+        expect { create(:user) }.to change(Group, :count).by(1)
+      end
+
+      it 'Membership が1つ作られる' do
+        expect { create(:user) }.to change(Membership, :count).by(1)
+      end
+    end
+
+    context '作成された Group は' do
+      let(:user) { create(:user) }
+
+      it '"マイストック" という名前である' do
+        expect(user.groups.first.name).to eq("マイストック")
+      end
+
+      it 'default が true である' do
+        expect(user.groups.first.default).to be true
+      end
+    end
+  end
 end
