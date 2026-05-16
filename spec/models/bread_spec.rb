@@ -181,4 +181,35 @@ RSpec.describe Bread, type: :model do
       end
     end
   end
+
+  describe 'after_commit :notify_if_needed' do
+    context '消費期限が今日のとき' do
+      it 'expiration_today の通知が作成される' do
+        expect {
+          create(:bread, expiration_date: Time.zone.today)
+        }.to change(Notification, :count).by(1)
+      end
+    end
+  
+    context '明日には在庫切れになるとき' do
+      it 'run_out_tomorrow の通知が作成される' do
+        expect {
+          create(
+            :bread,
+            total_count: 1,
+            daily_consumption: 1,
+            expiration_date: Time.zone.today + 5
+          )
+        }.to change(Notification, :count).by(1)
+      end
+    end
+  
+    context '条件に合致しないとき' do
+      it '通知は作成されない' do
+        expect {
+          create(:bread)   # factoryのデフォルトは余裕がある状態
+        }.not_to change(Notification, :count)
+      end
+    end
+  end
 end
