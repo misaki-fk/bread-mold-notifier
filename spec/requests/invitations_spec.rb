@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe "Invitations", type: :request do
   let(:user) { create(:user) }
-  let(:group) { create(:group, :with_user) }
 
   before do
     sign_in user
@@ -32,11 +31,7 @@ RSpec.describe "Invitations", type: :request do
   describe 'GET /invitations/:token' do
     it '招待ページを表示できる' do
       group = create(:group)
-      invitation = Invitation.create!(
-        group: group,
-        token: SecureRandom.urlsafe_base64,
-        expires_at: 3.days.from_now
-      )
+      invitation = create(:invitation, group: group)
 
       get invitation_path(invitation.token)
 
@@ -52,11 +47,7 @@ RSpec.describe "Invitations", type: :request do
   describe 'POST /invitations/:token/join' do
     it 'グループに参加できる' do
       group = create(:group)
-      invitation = Invitation.create!(
-        group: group,
-        token: SecureRandom.urlsafe_base64,
-        expires_at: 3.days.from_now
-      )
+      invitation = create(:invitation, group: group)
 
       post join_invitation_path(invitation.token)
 
@@ -67,11 +58,7 @@ RSpec.describe "Invitations", type: :request do
 
     it '期限切れのトークンは参加できない' do
       group = create(:group)
-      invitation = Invitation.create!(
-        group: group,
-        token: SecureRandom.urlsafe_base64,
-        expires_at: 1.hour.ago
-      )
+      invitation = create(:invitation, group: group, expires_at: 1.hour.ago)
 
       post join_invite_path(invitation.token)
 
@@ -82,11 +69,7 @@ RSpec.describe "Invitations", type: :request do
     it '既に参加している場合は重複しない' do
       group = create(:group)
       group.users << user
-      invitation = Invitation.create!(
-        group: group,
-        token: SecureRandom.urlsafe_base64,
-        expires_at: 3.days.from_now
-      )
+      invitation = create(:invitation, group: group)
 
       post join_invite_path(invitation.token)
 
