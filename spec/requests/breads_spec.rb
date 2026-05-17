@@ -23,3 +23,30 @@ RSpec.describe "パン登録", type: :request do
     expect(response.body).to include("6")
   end
 end
+
+RSpec.describe "パン登録の認可", type: :request do
+  describe '未ログイン時' do
+    it 'GET /breads/new はログイン画面にリダイレクトされる' do
+      get new_bread_path
+      expect(response).to redirect_to(new_user_session_path)
+    end
+
+    it 'POST /breads はログイン画面にリダイレクトされる' do
+      post breads_path, params: {
+        bread: {
+          bread_type_id: 1,
+          total_count: 6,
+          daily_consumption: 1,
+          expiration_date: Time.zone.today + 3
+        }
+      }
+      expect(response).to redirect_to(new_user_session_path)
+    end
+
+    it 'GET /breads/:id/edit はログイン画面にリダイレクトされる' do
+      bread = create(:bread)
+      get edit_bread_path(bread)
+      expect(response).to redirect_to(new_user_session_path)
+    end
+  end
+end
