@@ -125,7 +125,7 @@ LINEと連携するとパンの消費期限近づいたり、在庫がなくな�
 | 文字認識（OCR）   | Google Cloud Vision API                   | 消費期限入力の手間を減らし、ズボラなユーザーでも使いやすいUXを実現するため。                                |
 | インフラ / デプロイ | Render                                | 個人開発でも安定した本番運用が可能なため。                           |
 | 環境構築        | Docker                                | 開発環境差異によるトラブルを防ぎ、誰でも同じ環境を再現できるようにするため。                                 |
-| CI/CD       | GitHub Actions                        | push時に自動でテストを実行し、品質を保ちながら開発を進めるため。                                     |
+| CI/CD       | GitHub Actions                        | プルリクエスト時に自動でテストを実行し、品質を保ちながら開発を進めるため。                                     |
 
 ## 画面遷移図
   - [画面遷移図](https://www.figma.com/design/mGcQWNAu6rix3Myc0CvQ2X/%E3%83%91%E3%83%B3%E3%82%AB%E3%83%93%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B%E3%82%A2%E3%83%97%E3%83%AA?node-id=0-1&m=dev&t=pHMUbDI92hwxMPde-1)
