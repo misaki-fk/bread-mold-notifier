@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user!
+  before_action :reject_guest_user
   
   def index
     @groups = current_user.groups
