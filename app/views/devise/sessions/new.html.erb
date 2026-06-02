@@ -16,10 +16,23 @@
     <%= f.submit "ログイン", class: "btn btn-primary w-40 mx-auto block text-lg" %>
   </div>
 
+
+
   <p class="text-center text-sm text-gray-500 mt-4">
     <%= link_to "パスワードを忘れた場合", new_user_password_path,
         class: "link link-primary" %>
   </p>
-
 <% end %>
 
+<div class="text-center text-sm text-gray-400 my-4">または</div>
+
+<div class="flex justify-center">
+  <%= button_to user_line_omniauth_authorize_path,
+    method: :post,
+    data: { turbo: false },
+    class: "btn btn-success btn-lg rounded-xl inline-flex w-40 px-6 transition-transform active:scale-95 text-center" do %>
+    <span class="flex items-center gap-2">
+      <span>LINE<br>ログイン</span>
+    </span>
+  <% end %>
+</div>
