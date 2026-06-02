@@ -1,6 +1,6 @@
 class OcrsController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:create]
-
+  before_action :authenticate_user!
+  before_action :reject_guest_user
 
   def create
     image = params[:image]

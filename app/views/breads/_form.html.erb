@@ -13,7 +13,8 @@
     class: "input input-bordered mb-2" %>
 
     <p data-ocr-target="status" class="text-sm text-gray-500 mt-1"></p>
-  
+
+    <% if user_signed_in? && !current_user.guest? %>
     <!-- 区切り -->
     <div class="text-center text-sm text-gray-400 my-2">または</div>
 
@@ -26,6 +27,7 @@
              accept="image/*"
              class="hidden">
     </label>
+    <% end %>
   </div>
 
 
