@@ -57,8 +57,19 @@ https://pankabi.com
 ### 便利な機能
 - **いつも食べるパンの設定**<br>
 会員登録していると、いつも食べるパンを登録することができ、パンの登録時に消費期限の入力だけでパンを登録できます。
+
+<img src="https://i.gyazo.com/9c73e62ae80a50928a56b8f6b44b3061.png" width="250">
+
+- **消費期限を画像から読み取り**
+消費期限が分かるよう、写真を撮影し、写真から文字を読み取り消費期限を登録することができます。
+
+<img src="https://i.gyazo.com/49176cc186114a5fff4fed7686a5f7cf.png" width="250">
+
 - **LINEで通知を受け取る**<br>
 LINEと連携するとパンの消費期限近づいたり、在庫がなくなりそうになるとLINEでPankabiアプリからメッセージを受け取ることができます。
+
+
+<img src="app/assets/images/line_notification_sample.png" width="300">
 
 
 ## サービスの差別化ポイント
