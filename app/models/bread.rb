@@ -49,8 +49,10 @@ class Bread < ApplicationRecord
     end
   end
 
+  # データベースに保存後に通知を作成
   after_commit :notify_if_needed, on: [:create, :update]
 
+  # 通知が必要かどうかを判断
   def notify_if_needed
     if expiration_date == Time.zone.today
       create_notification("expiration_today")
@@ -71,6 +73,7 @@ class Bread < ApplicationRecord
     self.remaining_count = total_count
   end
 
+  # 通知を作成
   def create_notification(type)
     # 同じ通知が5分以内に作成されていたらスキップ
     return if Notification.exists?(

@@ -21,6 +21,7 @@ class Notification < ApplicationRecord
     end
   end
 
+  # LINEメッセージを生成
   def line_message
     greeting = "おはようございます ☀️"
 

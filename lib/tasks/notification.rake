@@ -1,3 +1,4 @@
+# LINE通知の作成と送信を行うRakeタスク
 namespace :notification do
   desc "通知作成"
   task create: :environment do
