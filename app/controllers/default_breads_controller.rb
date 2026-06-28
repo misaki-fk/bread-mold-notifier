@@ -37,10 +37,10 @@ class DefaultBreadsController < ApplicationController
   end
 
   def show
-  if @default_bread.present?
-    redirect_to edit_default_bread_path
-  else
-    redirect_to new_default_bread_path
+    if @default_bread.present?
+      redirect_to edit_default_bread_path
+    else
+      redirect_to new_default_bread_path
   end
 end
 
